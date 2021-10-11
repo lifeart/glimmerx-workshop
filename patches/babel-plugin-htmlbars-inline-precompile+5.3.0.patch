@@ -1,0 +1,19 @@
+diff --git a/node_modules/babel-plugin-htmlbars-inline-precompile/index.js b/node_modules/babel-plugin-htmlbars-inline-precompile/index.js
+index 700b3d6..29d9316 100644
+--- a/node_modules/babel-plugin-htmlbars-inline-precompile/index.js
++++ b/node_modules/babel-plugin-htmlbars-inline-precompile/index.js
+@@ -143,6 +143,14 @@ module.exports = function (babel) {
+         names.push(binding);
+       }
+ 
++      if (!scope.parent) {
++        Object.keys(scope.references).forEach((ref) => {
++          if (!names.includes(ref)) {
++            names.push(ref);
++          }
++        });
++      }
++
+       scope = scope.parent;
+     }
+ 
