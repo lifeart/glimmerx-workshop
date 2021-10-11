@@ -1,8 +1,12 @@
 import { defineConfig, PluginOption } from 'vite'
 import glimmerXPlugin from './lib/vite-plugin-glimmerx';
 
+import { visualizer } from 'rollup-plugin-visualizer';
+
+
 export default defineConfig({
   plugins: [
+    visualizer(),
     glimmerXPlugin() as PluginOption
   ],
   build: {

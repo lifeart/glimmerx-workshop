@@ -1,0 +1,106 @@
+diff --git a/node_modules/@glimmer/runtime/dist/modules/es2017/index.js b/node_modules/@glimmer/runtime/dist/modules/es2017/index.js
+index 92adc46..7cb89f8 100644
+--- a/node_modules/@glimmer/runtime/dist/modules/es2017/index.js
++++ b/node_modules/@glimmer/runtime/dist/modules/es2017/index.js
+@@ -1,6 +1,6 @@
+ import './lib/bootstrap';
+ export { clear, ConcreteBounds, CursorImpl } from './lib/bounds';
+-export { resetDebuggerCallback, setDebuggerCallback } from './lib/compiled/opcodes/debugger';
++// export { resetDebuggerCallback, setDebuggerCallback } from './lib/compiled/opcodes/debugger';
+ export { curry, CurriedValue } from './lib/curried-value';
+ export { TemplateOnlyComponentManager, TEMPLATE_ONLY_COMPONENT_MANAGER, TemplateOnlyComponentDefinition as TemplateOnlyComponent, templateOnlyComponent } from './lib/component/template-only';
+ export { default as DOMChanges, DOMChangesImpl as IDOMChanges, DOMTreeConstruction, isWhitespace } from './lib/dom/helper';
+@@ -12,7 +12,13 @@ export { UpdatingVM, VM as LowLevelVM } from './lib/vm';
+ export { EMPTY_ARGS, EMPTY_NAMED, EMPTY_POSITIONAL, createCapturedArgs, reifyArgs, reifyNamed, reifyPositional } from './lib/vm/arguments';
+ export { DynamicAttribute, dynamicAttribute, SimpleDynamicAttribute } from './lib/vm/attributes/dynamic';
+ export { clientBuilder, NewElementBuilder, UpdatableBlockImpl, RemoteLiveBlock } from './lib/vm/element-builder';
+-export { isSerializationFirstNode, RehydrateBuilder, rehydrationBuilder, SERIALIZATION_FIRST_NODE_STRING } from './lib/vm/rehydrate-builder';
++// export { isSerializationFirstNode, RehydrateBuilder, rehydrationBuilder, SERIALIZATION_FIRST_NODE_STRING } from './lib/vm/rehydrate-builder';
++export function isSerializationFirstNode() {
++    return false;
++}
++export const SERIALIZATION_FIRST_NODE_STRING = '';
++export function rehydrationBuilder() {};
++export class RehydrateBuilder {} {}
+ export { invokeHelper } from './lib/helpers/invoke';
+ export { default as fn } from './lib/helpers/fn';
+ export { default as hash } from './lib/helpers/hash';
+diff --git a/node_modules/@glimmer/runtime/dist/modules/es2017/lib/bootstrap.js b/node_modules/@glimmer/runtime/dist/modules/es2017/lib/bootstrap.js
+index d6d3f4c..655a336 100644
+--- a/node_modules/@glimmer/runtime/dist/modules/es2017/lib/bootstrap.js
++++ b/node_modules/@glimmer/runtime/dist/modules/es2017/lib/bootstrap.js
+@@ -2,9 +2,9 @@ import './opcodes';
+ import './compiled/opcodes/expressions';
+ import './compiled/opcodes/component';
+ import './compiled/opcodes/content';
+-import './compiled/opcodes/debugger';
++//import './compiled/opcodes/debugger';
+ import './compiled/opcodes/dom';
+-import './compiled/opcodes/partial';
++//import './compiled/opcodes/partial';
+ import './compiled/opcodes/vm';
+ import './compiled/opcodes/lists';
+ //# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uL3BhY2thZ2VzL0BnbGltbWVyL3J1bnRpbWUvbGliL2Jvb3RzdHJhcC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFdBQVA7QUFDQSxPQUFPLGdDQUFQO0FBQ0EsT0FBTyw4QkFBUDtBQUNBLE9BQU8sNEJBQVA7QUFDQSxPQUFPLDZCQUFQO0FBQ0EsT0FBTyx3QkFBUDtBQUNBLE9BQU8sNEJBQVA7QUFDQSxPQUFPLHVCQUFQO0FBQ0EsT0FBTywwQkFBUCIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCAnLi9vcGNvZGVzJztcbmltcG9ydCAnLi9jb21waWxlZC9vcGNvZGVzL2V4cHJlc3Npb25zJztcbmltcG9ydCAnLi9jb21waWxlZC9vcGNvZGVzL2NvbXBvbmVudCc7XG5pbXBvcnQgJy4vY29tcGlsZWQvb3Bjb2Rlcy9jb250ZW50JztcbmltcG9ydCAnLi9jb21waWxlZC9vcGNvZGVzL2RlYnVnZ2VyJztcbmltcG9ydCAnLi9jb21waWxlZC9vcGNvZGVzL2RvbSc7XG5pbXBvcnQgJy4vY29tcGlsZWQvb3Bjb2Rlcy9wYXJ0aWFsJztcbmltcG9ydCAnLi9jb21waWxlZC9vcGNvZGVzL3ZtJztcbmltcG9ydCAnLi9jb21waWxlZC9vcGNvZGVzL2xpc3RzJztcbiJdLCJzb3VyY2VSb290IjoiIn0=
+\ No newline at end of file
+diff --git a/node_modules/@glimmer/runtime/dist/modules/es2017/lib/dom/helper.js b/node_modules/@glimmer/runtime/dist/modules/es2017/lib/dom/helper.js
+index cf4513c..6a2e3a8 100644
+--- a/node_modules/@glimmer/runtime/dist/modules/es2017/lib/dom/helper.js
++++ b/node_modules/@glimmer/runtime/dist/modules/es2017/lib/dom/helper.js
+@@ -1,5 +1,5 @@
+-import { applySVGInnerHTMLFix } from '../compat/svg-inner-html-fix';
+-import { applyTextNodeMergingFix } from '../compat/text-node-merging-fix';
++// import { applySVGInnerHTMLFix } from '../compat/svg-inner-html-fix';
++// import { applyTextNodeMergingFix } from '../compat/text-node-merging-fix';
+ import { BLACKLIST_TABLE, DOMOperations } from './operations';
+ ['b', 'big', 'blockquote', 'body', 'br', 'center', 'code', 'dd', 'div', 'dl', 'dt', 'em', 'embed', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'head', 'hr', 'i', 'img', 'li', 'listing', 'main', 'meta', 'nobr', 'ol', 'p', 'pre', 'ruby', 's', 'small', 'span', 'strong', 'strike', 'sub', 'sup', 'table', 'tt', 'u', 'ul', 'var'].forEach(tag => BLACKLIST_TABLE[tag] = 1);
+ const WHITESPACE = /[\t-\r \xA0\u1680\u180E\u2000-\u200A\u2028\u2029\u202F\u205F\u3000\uFEFF]/;
+@@ -27,10 +27,10 @@ export var DOM;
+ 
+   DOM.TreeConstruction = TreeConstruction;
+   let appliedTreeConstruction = TreeConstruction;
+-  appliedTreeConstruction = applyTextNodeMergingFix(doc, appliedTreeConstruction);
+-  appliedTreeConstruction = applySVGInnerHTMLFix(doc, appliedTreeConstruction, "http://www.w3.org/2000/svg"
++  // appliedTreeConstruction = applyTextNodeMergingFix(doc, appliedTreeConstruction);
++  // appliedTreeConstruction = applySVGInnerHTMLFix(doc, appliedTreeConstruction, "http://www.w3.org/2000/svg"
+   /* SVG */
+-  );
++  // );
+   DOM.DOMTreeConstruction = appliedTreeConstruction;
+ })(DOM || (DOM = {}));
+ 
+@@ -55,10 +55,10 @@ export class DOMChangesImpl extends DOMOperations {
+ 
+ }
+ let helper = DOMChangesImpl;
+-helper = applyTextNodeMergingFix(doc, helper);
+-helper = applySVGInnerHTMLFix(doc, helper, "http://www.w3.org/2000/svg"
++// helper = applyTextNodeMergingFix(doc, helper);
++// helper = applySVGInnerHTMLFix(doc, helper, "http://www.w3.org/2000/svg"
+ /* SVG */
+-);
++// );
+ export default helper;
+ export const DOMTreeConstruction = DOM.DOMTreeConstruction;
+ //# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uLy4uLy4uLy4uL3BhY2thZ2VzL0BnbGltbWVyL3J1bnRpbWUvbGliL2RvbS9oZWxwZXIudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBVUEsU0FBUyxvQkFBVCxRQUFxQyw4QkFBckM7QUFDQSxTQUFTLHVCQUFULFFBQXdDLGlDQUF4QztBQUNBLFNBQVMsZUFBVCxFQUEwQixhQUExQixRQUErQyxjQUEvQztBQUVBLENBQ0UsR0FERixFQUVFLEtBRkYsRUFHRSxZQUhGLEVBSUUsTUFKRixFQUtFLElBTEYsRUFNRSxRQU5GLEVBT0UsTUFQRixFQVFFLElBUkYsRUFTRSxLQVRGLEVBVUUsSUFWRixFQVdFLElBWEYsRUFZRSxJQVpGLEVBYUUsT0FiRixFQWNFLElBZEYsRUFlRSxJQWZGLEVBZ0JFLElBaEJGLEVBaUJFLElBakJGLEVBa0JFLElBbEJGLEVBbUJFLElBbkJGLEVBb0JFLE1BcEJGLEVBcUJFLElBckJGLEVBc0JFLEdBdEJGLEVBdUJFLEtBdkJGLEVBd0JFLElBeEJGLEVBeUJFLFNBekJGLEVBMEJFLE1BMUJGLEVBMkJFLE1BM0JGLEVBNEJFLE1BNUJGLEVBNkJFLElBN0JGLEVBOEJFLEdBOUJGLEVBK0JFLEtBL0JGLEVBZ0NFLE1BaENGLEVBaUNFLEdBakNGLEVBa0NFLE9BbENGLEVBbUNFLE1BbkNGLEVBb0NFLFFBcENGLEVBcUNFLFFBckNGLEVBc0NFLEtBdENGLEVBdUNFLEtBdkNGLEVBd0NFLE9BeENGLEVBeUNFLElBekNGLEVBMENFLEdBMUNGLEVBMkNFLElBM0NGLEVBNENFLEtBNUNGLEVBNkNFLE9BN0NGLENBNkNXLEdBQUQsSUFBVSxlQUFlLENBQUMsR0FBRCxDQUFmLEdBQXVCLENBN0MzQztBQStDQSxNQUFNLFVBQVUsR0FBRywyRUFBbkI7QUFFQSxJQUFJLEdBQUcsR0FBMkIsT0FBTyxRQUFQLEtBQW9CLFdBQXBCLEdBQWtDLElBQWxDLEdBQXNELFFBQXhGO0FBRUEsT0FBTSxTQUFVLFlBQVYsQ0FBdUIsTUFBdkIsRUFBcUM7QUFDekMsU0FBTyxVQUFVLENBQUMsSUFBWCxDQUFnQixNQUFoQixDQUFQO0FBQ0Q7QUFFRCxPQUFNLElBQVcsR0FBWDs7QUFBTixDQUFBLFVBQWlCLEdBQWpCLEVBQW9CO0FBQ2xCLFFBQWEsZ0JBQWIsU0FBc0MsYUFBdEMsQ0FBbUQ7QUFDakQsSUFBQSxlQUFlLENBQUMsU0FBRCxFQUE4QixHQUE5QixFQUF5QztBQUN0RCxhQUFPLEtBQUssUUFBTCxDQUFjLGVBQWQsQ0FBOEIsU0FBOUIsRUFBeUMsR0FBekMsQ0FBUDtBQUNEOztBQUVELElBQUEsWUFBWSxDQUNWLE9BRFUsRUFFVixJQUZVLEVBR1YsS0FIVSxFQUlWLFNBQUEsR0FBbUMsSUFKekIsRUFJNkI7QUFFdkMsVUFBSSxTQUFKLEVBQWU7QUFDYixRQUFBLE9BQU8sQ0FBQyxjQUFSLENBQXVCLFNBQXZCLEVBQWtDLElBQWxDLEVBQXdDLEtBQXhDO0FBQ0QsT0FGRCxNQUVPO0FBQ0wsUUFBQSxPQUFPLENBQUMsWUFBUixDQUFxQixJQUFyQixFQUEyQixLQUEzQjtBQUNEO0FBQ0Y7O0FBaEJnRDs7QUFBdEMsRUFBQSxHQUFBLENBQUEsZ0JBQUEsR0FBZ0IsZ0JBQWhCO0FBbUJiLE1BQUksdUJBQXVCLEdBQUcsZ0JBQTlCO0FBQ0EsRUFBQSx1QkFBdUIsR0FBRyx1QkFBdUIsQ0FDL0MsR0FEK0MsRUFFL0MsdUJBRitDLENBQWpEO0FBSUEsRUFBQSx1QkFBdUIsR0FBRyxvQkFBb0IsQ0FDNUMsR0FENEMsRUFFNUMsdUJBRjRDLEVBRXJCO0FBQUE7QUFGcUIsR0FBOUM7QUFNYSxFQUFBLEdBQUEsQ0FBQSxtQkFBQSxHQUFzQix1QkFBdEI7QUFFZCxDQWpDRCxFQUFpQixHQUFHLEtBQUgsR0FBRyxHQUFBLEVBQUEsQ0FBcEI7O0FBbUNBLE9BQU0sTUFBTyxjQUFQLFNBQThCLGFBQTlCLENBQTJDO0FBRy9DLEVBQUEsV0FBQSxDQUFzQixRQUF0QixFQUE4QztBQUM1QyxVQUFNLFFBQU47QUFEb0IsU0FBQSxRQUFBLEdBQUEsUUFBQTtBQUVwQixTQUFLLFNBQUwsR0FBaUIsSUFBakI7QUFDRDs7QUFFRCxFQUFBLFlBQVksQ0FBQyxPQUFELEVBQXlCLElBQXpCLEVBQXVDLEtBQXZDLEVBQW9EO0FBQzlELElBQUEsT0FBTyxDQUFDLFlBQVIsQ0FBcUIsSUFBckIsRUFBMkIsS0FBM0I7QUFDRDs7QUFFRCxFQUFBLGVBQWUsQ0FBQyxPQUFELEVBQXlCLElBQXpCLEVBQXFDO0FBQ2xELElBQUEsT0FBTyxDQUFDLGVBQVIsQ0FBd0IsSUFBeEI7QUFDRDs7QUFFRCxFQUFBLFdBQVcsQ0FBQyxPQUFELEVBQXlCLElBQXpCLEVBQTJDLFNBQTNDLEVBQWdFO0FBQ3pFLFNBQUssWUFBTCxDQUFrQixPQUFsQixFQUEyQixJQUEzQixFQUFpQyxTQUFTLENBQUMsV0FBM0M7QUFDRDs7QUFsQjhDO0FBcUJqRCxJQUFJLE1BQU0sR0FBRyxjQUFiO0FBRUEsTUFBTSxHQUFHLHVCQUF1QixDQUFDLEdBQUQsRUFBTSxNQUFOLENBQWhDO0FBQ0EsTUFBTSxHQUFHLG9CQUFvQixDQUFDLEdBQUQsRUFBTSxNQUFOLEVBQVk7QUFBQTtBQUFaLENBQTdCO0FBRUEsZUFBZSxNQUFmO0FBQ0EsT0FBTyxNQUFNLG1CQUFtQixHQUFHLEdBQUcsQ0FBQyxtQkFBaEMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBHbGltbWVyVHJlZUNoYW5nZXMsIEdsaW1tZXJUcmVlQ29uc3RydWN0aW9uLCBPcHRpb24gfSBmcm9tICdAZ2xpbW1lci9pbnRlcmZhY2VzJztcbmltcG9ydCB7IGNhc3RUb1NpbXBsZSB9IGZyb20gJ0BnbGltbWVyL3V0aWwnO1xuaW1wb3J0IHtcbiAgQXR0ck5hbWVzcGFjZSxcbiAgRWxlbWVudE5hbWVzcGFjZSxcbiAgTmFtZXNwYWNlLFxuICBTaW1wbGVEb2N1bWVudCxcbiAgU2ltcGxlRWxlbWVudCxcbiAgU2ltcGxlTm9kZSxcbn0gZnJvbSAnQHNpbXBsZS1kb20vaW50ZXJmYWNlJztcbmltcG9ydCB7IGFwcGx5U1ZHSW5uZXJIVE1MRml4IH0gZnJvbSAnLi4vY29tcGF0L3N2Zy1pbm5lci1odG1sLWZpeCc7XG5pbXBvcnQgeyBhcHBseVRleHROb2RlTWVyZ2luZ0ZpeCB9IGZyb20gJy4uL2NvbXBhdC90ZXh0LW5vZGUtbWVyZ2luZy1maXgnO1xuaW1wb3J0IHsgQkxBQ0tMSVNUX1RBQkxFLCBET01PcGVyYXRpb25zIH0gZnJvbSAnLi9vcGVyYXRpb25zJztcblxuW1xuICAnYicsXG4gICdiaWcnLFxuICAnYmxvY2txdW90ZScsXG4gICdib2R5JyxcbiAgJ2JyJyxcbiAgJ2NlbnRlcicsXG4gICdjb2RlJyxcbiAgJ2RkJyxcbiAgJ2RpdicsXG4gICdkbCcsXG4gICdkdCcsXG4gICdlbScsXG4gICdlbWJlZCcsXG4gICdoMScsXG4gICdoMicsXG4gICdoMycsXG4gICdoNCcsXG4gICdoNScsXG4gICdoNicsXG4gICdoZWFkJyxcbiAgJ2hyJyxcbiAgJ2knLFxuICAnaW1nJyxcbiAgJ2xpJyxcbiAgJ2xpc3RpbmcnLFxuICAnbWFpbicsXG4gICdtZXRhJyxcbiAgJ25vYnInLFxuICAnb2wnLFxuICAncCcsXG4gICdwcmUnLFxuICAncnVieScsXG4gICdzJyxcbiAgJ3NtYWxsJyxcbiAgJ3NwYW4nLFxuICAnc3Ryb25nJyxcbiAgJ3N0cmlrZScsXG4gICdzdWInLFxuICAnc3VwJyxcbiAgJ3RhYmxlJyxcbiAgJ3R0JyxcbiAgJ3UnLFxuICAndWwnLFxuICAndmFyJyxcbl0uZm9yRWFjaCgodGFnKSA9PiAoQkxBQ0tMSVNUX1RBQkxFW3RhZ10gPSAxKSk7XG5cbmNvbnN0IFdISVRFU1BBQ0UgPSAvW1xcdC1cXHIgXFx4QTBcXHUxNjgwXFx1MTgwRVxcdTIwMDAtXFx1MjAwQVxcdTIwMjhcXHUyMDI5XFx1MjAyRlxcdTIwNUZcXHUzMDAwXFx1RkVGRl0vO1xuXG5sZXQgZG9jOiBPcHRpb248U2ltcGxlRG9jdW1lbnQ+ID0gdHlwZW9mIGRvY3VtZW50ID09PSAndW5kZWZpbmVkJyA/IG51bGwgOiBjYXN0VG9TaW1wbGUoZG9jdW1lbnQpO1xuXG5leHBvcnQgZnVuY3Rpb24gaXNXaGl0ZXNwYWNlKHN0cmluZzogc3RyaW5nKSB7XG4gIHJldHVybiBXSElURVNQQUNFLnRlc3Qoc3RyaW5nKTtcbn1cblxuZXhwb3J0IG5hbWVzcGFjZSBET00ge1xuICBleHBvcnQgY2xhc3MgVHJlZUNvbnN0cnVjdGlvbiBleHRlbmRzIERPTU9wZXJhdGlvbnMgaW1wbGVtZW50cyBHbGltbWVyVHJlZUNvbnN0cnVjdGlvbiB7XG4gICAgY3JlYXRlRWxlbWVudE5TKG5hbWVzcGFjZTogRWxlbWVudE5hbWVzcGFjZSwgdGFnOiBzdHJpbmcpOiBTaW1wbGVFbGVtZW50IHtcbiAgICAgIHJldHVybiB0aGlzLmRvY3VtZW50LmNyZWF0ZUVsZW1lbnROUyhuYW1lc3BhY2UsIHRhZyk7XG4gICAgfVxuXG4gICAgc2V0QXR0cmlidXRlKFxuICAgICAgZWxlbWVudDogU2ltcGxlRWxlbWVudCxcbiAgICAgIG5hbWU6IHN0cmluZyxcbiAgICAgIHZhbHVlOiBzdHJpbmcsXG4gICAgICBuYW1lc3BhY2U6IE9wdGlvbjxBdHRyTmFtZXNwYWNlPiA9IG51bGxcbiAgICApIHtcbiAgICAgIGlmIChuYW1lc3BhY2UpIHtcbiAgICAgICAgZWxlbWVudC5zZXRBdHRyaWJ1dGVOUyhuYW1lc3BhY2UsIG5hbWUsIHZhbHVlKTtcbiAgICAgIH0gZWxzZSB7XG4gICAgICAgIGVsZW1lbnQuc2V0QXR0cmlidXRlKG5hbWUsIHZhbHVlKTtcbiAgICAgIH1cbiAgICB9XG4gIH1cblxuICBsZXQgYXBwbGllZFRyZWVDb25zdHJ1Y3Rpb24gPSBUcmVlQ29uc3RydWN0aW9uO1xuICBhcHBsaWVkVHJlZUNvbnN0cnVjdGlvbiA9IGFwcGx5VGV4dE5vZGVNZXJnaW5nRml4KFxuICAgIGRvYyxcbiAgICBhcHBsaWVkVHJlZUNvbnN0cnVjdGlvblxuICApIGFzIHR5cGVvZiBUcmVlQ29uc3RydWN0aW9uO1xuICBhcHBsaWVkVHJlZUNvbnN0cnVjdGlvbiA9IGFwcGx5U1ZHSW5uZXJIVE1MRml4KFxuICAgIGRvYyxcbiAgICBhcHBsaWVkVHJlZUNvbnN0cnVjdGlvbixcbiAgICBOYW1lc3BhY2UuU1ZHXG4gICkgYXMgdHlwZW9mIFRyZWVDb25zdHJ1Y3Rpb247XG5cbiAgZXhwb3J0IGNvbnN0IERPTVRyZWVDb25zdHJ1Y3Rpb24gPSBhcHBsaWVkVHJlZUNvbnN0cnVjdGlvbjtcbiAgZXhwb3J0IHR5cGUgRE9NVHJlZUNvbnN0cnVjdGlvbiA9IFRyZWVDb25zdHJ1Y3Rpb247XG59XG5cbmV4cG9ydCBjbGFzcyBET01DaGFuZ2VzSW1wbCBleHRlbmRzIERPTU9wZXJhdGlvbnMgaW1wbGVtZW50cyBHbGltbWVyVHJlZUNoYW5nZXMge1xuICBwcm90ZWN0ZWQgbmFtZXNwYWNlOiBPcHRpb248c3RyaW5nPjtcblxuICBjb25zdHJ1Y3Rvcihwcm90ZWN0ZWQgZG9jdW1lbnQ6IFNpbXBsZURvY3VtZW50KSB7XG4gICAgc3VwZXIoZG9jdW1lbnQpO1xuICAgIHRoaXMubmFtZXNwYWNlID0gbnVsbDtcbiAgfVxuXG4gIHNldEF0dHJpYnV0ZShlbGVtZW50OiBTaW1wbGVFbGVtZW50LCBuYW1lOiBzdHJpbmcsIHZhbHVlOiBzdHJpbmcpIHtcbiAgICBlbGVtZW50LnNldEF0dHJpYnV0ZShuYW1lLCB2YWx1ZSk7XG4gIH1cblxuICByZW1vdmVBdHRyaWJ1dGUoZWxlbWVudDogU2ltcGxlRWxlbWVudCwgbmFtZTogc3RyaW5nKSB7XG4gICAgZWxlbWVudC5yZW1vdmVBdHRyaWJ1dGUobmFtZSk7XG4gIH1cblxuICBpbnNlcnRBZnRlcihlbGVtZW50OiBTaW1wbGVFbGVtZW50LCBub2RlOiBTaW1wbGVOb2RlLCByZWZlcmVuY2U6IFNpbXBsZU5vZGUpIHtcbiAgICB0aGlzLmluc2VydEJlZm9yZShlbGVtZW50LCBub2RlLCByZWZlcmVuY2UubmV4dFNpYmxpbmcpO1xuICB9XG59XG5cbmxldCBoZWxwZXIgPSBET01DaGFuZ2VzSW1wbDtcblxuaGVscGVyID0gYXBwbHlUZXh0Tm9kZU1lcmdpbmdGaXgoZG9jLCBoZWxwZXIpIGFzIHR5cGVvZiBET01DaGFuZ2VzSW1wbDtcbmhlbHBlciA9IGFwcGx5U1ZHSW5uZXJIVE1MRml4KGRvYywgaGVscGVyLCBOYW1lc3BhY2UuU1ZHKSBhcyB0eXBlb2YgRE9NQ2hhbmdlc0ltcGw7XG5cbmV4cG9ydCBkZWZhdWx0IGhlbHBlcjtcbmV4cG9ydCBjb25zdCBET01UcmVlQ29uc3RydWN0aW9uID0gRE9NLkRPTVRyZWVDb25zdHJ1Y3Rpb247XG5leHBvcnQgdHlwZSBET01UcmVlQ29uc3RydWN0aW9uID0gRE9NLkRPTVRyZWVDb25zdHJ1Y3Rpb247XG5leHBvcnQgdHlwZSBET01OYW1lc3BhY2UgPSBOYW1lc3BhY2U7XG4iXSwic291cmNlUm9vdCI6IiJ9
+\ No newline at end of file
+diff --git a/node_modules/@glimmer/runtime/dist/modules/es2017/lib/environment.js b/node_modules/@glimmer/runtime/dist/modules/es2017/lib/environment.js
+index 8cb3458..cbd6ce0 100644
+--- a/node_modules/@glimmer/runtime/dist/modules/es2017/lib/environment.js
++++ b/node_modules/@glimmer/runtime/dist/modules/es2017/lib/environment.js
+@@ -5,7 +5,6 @@ import { assert, symbol } from '@glimmer/util';
+ import { track, updateTag } from '@glimmer/validator';
+ import { DOMChangesImpl, DOMTreeConstruction } from './dom/helper';
+ import { RuntimeProgramImpl } from '@glimmer/program';
+-import DebugRenderTree from './debug-render-tree';
+ export const TRANSACTION = symbol('TRANSACTION');
+ 
+ class TransactionImpl {
+@@ -101,7 +100,7 @@ export class EnvironmentImpl {
+     this[_a] = null; // Delegate methods and values
+ 
+     this.isInteractive = this.delegate.isInteractive;
+-    this.debugRenderTree = this.delegate.enableDebugTooling ? new DebugRenderTree() : undefined;
++    this.debugRenderTree = undefined;
+ 
+     if (options.appendOperations) {
+       this.appendOperations = options.appendOperations;
