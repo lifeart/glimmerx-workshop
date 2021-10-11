@@ -3,9 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
+    "serve-bundle": "npx http-server ./dist",
     "build": "tsc && vite build",
     "lint": "eslint ./src",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "postinstall": "patch-package"
   },
   "devDependencies": {
     "@glimmerx/babel-preset": "^0.6.5",
@@ -21,7 +23,9 @@
   "dependencies": {
     "@babel/preset-typescript": "^7.15.0",
     "@glimmerx/component": "^0.6.5",
-    "@glimmerx/core": "^0.6.5"
+    "@glimmerx/core": "^0.6.5",
+    "patch-package": "^6.4.7",
+    "postinstall-postinstall": "^2.1.0"
   },
   "volta": {
     "node": "16.11.0"
