@@ -24,6 +24,8 @@
     "@babel/preset-typescript": "^7.15.0",
     "@glimmerx/component": "^0.6.5",
     "@glimmerx/core": "^0.6.5",
+    "@glimmerx/modifier": "^0.6.5",
+    "parse-static-imports": "^1.1.0",
     "patch-package": "^6.4.7",
     "postinstall-postinstall": "^2.1.0"
   },

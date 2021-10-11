@@ -16,6 +16,7 @@ module.exports = {
         '@glimmerx'
     ],
     "rules": {
-        '@glimmerx/template-vars': 'error'
+        '@glimmerx/template-vars': 'error',
+        '@typescript-eslint/explicit-module-boundary-types': 'off'
     }
 };
