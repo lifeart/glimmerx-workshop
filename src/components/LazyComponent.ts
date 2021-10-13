@@ -9,6 +9,9 @@ export default class LazyComponentWrapper {
     @tracked isError = false;
     @tracked isLoaded = false;
     @tracked Component: string | null = null;
+    unloadComponent() {
+        this.isLoaded = false;
+    }
     async loadComponent() {
         try {
             this.isLoading = true;
