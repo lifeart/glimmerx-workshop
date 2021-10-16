@@ -1,14 +1,14 @@
 import { tracked  } from "@glimmerx/component";
 
 
-export default class LazyComponentWrapper {
+export default class LazyComponentWrapper<T> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     constructor(private fn: () => Promise<any>) {
     }
     @tracked isLoading = false;
     @tracked isError = false;
     @tracked isLoaded = false;
-    @tracked Component: string | null = null;
+    @tracked Component!: T;
     unloadComponent() {
         this.isLoaded = false;
     }

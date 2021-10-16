@@ -1,19 +1,28 @@
-import Component, { hbs, tracked } from '@glimmerx/component';
+import { hbs, tracked } from '@glimmerx/component';
 import { on, action } from '@glimmerx/modifier';
 import { useQuery, gql } from 'glimmer-apollo';
 import logo from "./assets/glimmer-logo.png";
+
+import Component from '@glint/environment-glimmerx/component';
+import type { TemplateComponent } from '@glint/environment-glimmerx/component';
+
 
 import HelloWorld from "./components/HelloWorld.hbs";
 
 import LazyComponentWrapper from "./components/LazyComponent";
 import { getSearchValues, setSearchValue } from "./utils/search-params";
 
-const Heading = hbs`<h1>Hello {{@bundlerName}}!</h1>`;
+const Heading: TemplateComponent<{Args: { bundlerName: string }}> = hbs`<h1>Hello {{@bundlerName}}!</h1>`;
 
-const DocumentationLink = hbs`<a href="https://vitejs.dev/guide/features.html" target="_blank" rel="noopener noreferrer">Documentation</a>`;
+const DocumentationLink: TemplateComponent<{}> = hbs`<a href="https://vitejs.dev/guide/features.html" target="_blank" rel="noopener noreferrer">Documentation</a>`;
 
 
-const ListItem = hbs`
+interface ListItemParams {
+  Args: {
+    name: string
+  }
+}
+const ListItem: TemplateComponent<ListItemParams> = hbs`
     <div
       class="flex justify-start cursor-pointer text-gray-700 hover:text-blue-400 hover:bg-blue-100 rounded-md px-2 py-2 my-2">
       <span class="bg-green-600 h-2 w-2 m-2 rounded-full"></span>
@@ -23,7 +32,7 @@ const ListItem = hbs`
 `;
 
 
-export default class App extends Component {
+export default class App extends Component<{}> {
   @tracked _bundlerName = getSearchValues().bundler ?? 'vite';
   @tracked repos = [];
   @tracked selectedNote: any;
@@ -58,8 +67,8 @@ export default class App extends Component {
     setSearchValue('bundler', value);
     this._bundlerName = value;
   }
-  @tracked Icon = new LazyComponentWrapper(() => import('./components/LazyIcon.hbs'));
-  @tracked UserList = new LazyComponentWrapper(() => import('./components/UserList.hbs'));
+  @tracked Icon = new LazyComponentWrapper<TemplateComponent>(() => import('./components/LazyIcon.hbs'));
+  @tracked UserList = new LazyComponentWrapper<TemplateComponent<{ Args: { logo: string; title: string}}>>(() => import('./components/UserList.hbs'));
   assets = { logo };
   static template = hbs`
   <section class="text-gray-600 body-font">

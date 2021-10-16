@@ -1,0 +1,3 @@
+environment: glimmerx
+include:
+  - src/**
