@@ -1,9 +1,10 @@
 import { hbs, tracked } from '@glimmerx/component';
-import { on, action } from '@glimmerx/modifier';
+import { action } from '@glimmerx/modifier';
 import { useQuery, gql } from 'glimmer-apollo';
 import logo from "./assets/glimmer-logo.png";
 
 import Component from '@glint/environment-glimmerx/component';
+import { on } from '@glint/environment-glimmerx/modifier';
 import type { TemplateComponent } from '@glint/environment-glimmerx/component';
 
 
@@ -12,8 +13,10 @@ import HelloWorld from "./components/HelloWorld.hbs";
 import LazyComponentWrapper from "./components/LazyComponent";
 import { getSearchValues, setSearchValue } from "./utils/search-params";
 
-const Heading: TemplateComponent<{Args: { bundlerName: string }}> = hbs`<h1>Hello {{@bundlerName}}!</h1>`;
+// @ts-ignore
+const Heading: TemplateComponent<{ Args: { bundlerName: string } }> = hbs`<h1>Hello {{@bundlerName}}!</h1>`;
 
+// @ts-ignore
 const DocumentationLink: TemplateComponent<{}> = hbs`<a href="https://vitejs.dev/guide/features.html" target="_blank" rel="noopener noreferrer">Documentation</a>`;
 
 
@@ -22,6 +25,8 @@ interface ListItemParams {
     name: string
   }
 }
+
+// @ts-ignore
 const ListItem: TemplateComponent<ListItemParams> = hbs`
     <div
       class="flex justify-start cursor-pointer text-gray-700 hover:text-blue-400 hover:bg-blue-100 rounded-md px-2 py-2 my-2">
@@ -32,22 +37,37 @@ const ListItem: TemplateComponent<ListItemParams> = hbs`
 `;
 
 
+type RepoNode = {
+  description: string;
+  id: string;
+  name: string;
+};
+
+type ListOfRepositoriesQuery = {
+  repositoryOwner: {
+    login: string;
+    repositories: {
+      nodes: RepoNode[]
+    }
+  }
+};
+
+
 export default class App extends Component<{}> {
   @tracked _bundlerName = getSearchValues().bundler ?? 'vite';
-  @tracked repos = [];
   @tracked selectedNote: any;
 
-  notes = useQuery(this, () => [
+  notes = useQuery<ListOfRepositoriesQuery>(this, () => [
     gql`
             query ListOfRepositories($login: String!) {
                 repositoryOwner(login: $login) {
                     login
                     repositories(last: 20) {
-                    nodes {
-                        description
-                        id
-                        name
-                    }
+                      nodes {
+                          description
+                          id
+                          name
+                      }
                     }
                 }
             }
@@ -59,7 +79,9 @@ export default class App extends Component<{}> {
       }
     }
   ]);
-
+  get repos() {
+    return this.notes.data?.repositoryOwner.repositories.nodes ?? [];
+  }
   get bundlerName() {
     return this._bundlerName;
   }
@@ -68,7 +90,7 @@ export default class App extends Component<{}> {
     this._bundlerName = value;
   }
   @tracked Icon = new LazyComponentWrapper<TemplateComponent>(() => import('./components/LazyIcon.hbs'));
-  @tracked UserList = new LazyComponentWrapper<TemplateComponent<{ Args: { logo: string; title: string}}>>(() => import('./components/UserList.hbs'));
+  @tracked UserList = new LazyComponentWrapper<TemplateComponent<{ Args: { logo: string; title: string } }>>(() => import('./components/UserList.hbs'));
   assets = { logo };
   static template = hbs`
   <section class="text-gray-600 body-font">
@@ -95,7 +117,7 @@ export default class App extends Component<{}> {
           Loading notes
         {{else}}
           <div class="py-3 text-sm">
-            {{#each this.notes.data.repositoryOwner.repositories.nodes as |repo|}}
+            {{#each this.repos as |repo|}}
               <ListItem @name={{repo.name}} />
             {{/each}}
           </div>
@@ -115,8 +137,8 @@ export default class App extends Component<{}> {
   </section>
 
     `;
-  @action updateValue(event: { target: HTMLInputElement }) {
-    this.bundlerName = event.target.value;
+  @action updateValue(event: Event) {
+    this.bundlerName = (event.target as HTMLInputElement).value;
     if (this.bundlerName === "icon") {
       this.Icon.loadComponent();
     } else if (this.bundlerName === "-icon") {
