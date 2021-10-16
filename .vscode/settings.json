@@ -1,3 +1,6 @@
 {
-    "editor.showUnused": false
+    "editor.showUnused": false,
+    "hbs.tags": [
+        "hbs"
+    ]
 }

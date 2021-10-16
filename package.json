@@ -16,6 +16,7 @@
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "autoprefixer": "^10.3.7",
+    "ember-template-lint": "^3.10.0",
     "eslint": "^7.32.0",
     "glimmer-apollo": "^0.4.0",
     "graphql": "^15.6.1",

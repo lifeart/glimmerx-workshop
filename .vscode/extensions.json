@@ -1,0 +1,29 @@
+{
+    "recommendations": [
+        "dbaeumer.vscode-eslint",
+        "lifeart.vscode-glimmer-syntax",
+        "graphql.vscode-graphql",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss",
+        "loiane.ts-extension-pack",
+        "lifeart.vscode-ember-unstable"
+    ],
+    "unwantedRecommendations": [
+        "bierner.lit-html",
+        "octref.vetur",
+        "ms-vscode-remote.remote-containers",
+        "ms-azuretools.vscode-docker",
+        "firefox-devtools.vscode-firefox-debug",
+        "dbaeumer.jshint",
+        "hookyqr.beautify",
+        "christian-kohler.npm-intellisense",
+        "davidanson.vscode-markdownlint",
+        "felipecaputo.git-project-manager",
+        "ms-vscode.notepadplusplus-keybindings",
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "googlecloudtools.cloudcode",
+        "github.vscode-pull-request-github",
+        "mindaro.mindaro",
+        "eamodio.gitlens"
+    ]
+}

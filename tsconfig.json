@@ -13,7 +13,16 @@
     "noEmit": true,
     "noUnusedLocals": false,
     "noUnusedParameters": true,
-    "noImplicitReturns": true
+    "noImplicitReturns": true,
+    "plugins": [
+      {
+        "name": "typescript-hbs-plugin",
+        "tags": [
+          "hbs"
+        ],
+        "format": { "enabled": true }
+      }
+    ]
   },
   "include": ["./src/**/*", "types/**/*"]
 }
