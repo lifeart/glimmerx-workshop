@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import 'glimmer-apollo/environment-glimmer';
+import Component from '@glint/environment-glimmerx/component';
 import { setClient } from 'glimmer-apollo';
 import {
   ApolloClient,
@@ -6,9 +8,9 @@ import {
   createHttpLink
 } from '@apollo/client/core';
 
-import Component, { hbs } from '@glimmerx/component';
+import { hbs } from '@glimmerx/component';
 
-export class GlimmerApolloProvider extends Component {
+export class GlimmerApolloProvider extends Component<{Args: {Component?: typeof Component}; Yields: { default: []}}> {
   constructor(owner: any, args: Record<string, unknown>) {
     super(owner, args);
     setupApolloClient(this);

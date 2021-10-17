@@ -1,6 +1,6 @@
 import { hbs, tracked } from '@glimmerx/component';
+
 import { action } from '@glimmerx/modifier';
-import { useQuery, gql } from 'glimmer-apollo';
 import logo from "./assets/glimmer-logo.png";
 
 import Component from '@glint/environment-glimmerx/component';
@@ -10,8 +10,9 @@ import type { TemplateComponent } from '@glint/environment-glimmerx/component';
 
 import HelloWorld from "./components/HelloWorld.hbs";
 
-import LazyComponentWrapper from "./components/LazyComponent";
+import LazyComponentWrapper from "./utils/LazyComponent";
 import { getSearchValues, setSearchValue } from "./utils/search-params";
+import type IRepositoriesLoader from './components/RepositoriesLoader';
 
 // @ts-ignore
 const Heading: TemplateComponent<{ Args: { bundlerName: string } }> = hbs`<h1>Hello {{@bundlerName}}!</h1>`;
@@ -37,51 +38,20 @@ const ListItem: TemplateComponent<ListItemParams> = hbs`
 `;
 
 
-type RepoNode = {
-  description: string;
-  id: string;
-  name: string;
-};
-
-type ListOfRepositoriesQuery = {
-  repositoryOwner: {
-    login: string;
-    repositories: {
-      nodes: RepoNode[]
-    }
-  }
-};
-
 
 export default class App extends Component<{}> {
+  constructor() {
+    super(...arguments);
+    if (('window' in globalThis)) {
+      import('./configs/apollo').then((result) => {
+        result.default(this);
+        this.Repositories.loadComponent();
+      });
+    }
+  }
   @tracked _bundlerName = getSearchValues().bundler ?? 'vite';
   @tracked selectedNote: any;
 
-  notes = useQuery<ListOfRepositoriesQuery>(this, () => [
-    gql`
-            query ListOfRepositories($login: String!) {
-                repositoryOwner(login: $login) {
-                    login
-                    repositories(last: 20) {
-                      nodes {
-                          description
-                          id
-                          name
-                      }
-                    }
-                }
-            }
-        `,
-    {
-      variables: { login: this.bundlerName },
-      onComplete: (): void => {
-        this.selectedNote = undefined;
-      }
-    }
-  ]);
-  get repos() {
-    return this.notes.data?.repositoryOwner.repositories.nodes ?? [];
-  }
   get bundlerName() {
     return this._bundlerName;
   }
@@ -89,8 +59,9 @@ export default class App extends Component<{}> {
     setSearchValue('bundler', value);
     this._bundlerName = value;
   }
-  @tracked Icon = new LazyComponentWrapper<TemplateComponent>(() => import('./components/LazyIcon.hbs'));
-  @tracked UserList = new LazyComponentWrapper<TemplateComponent<{ Args: { logo: string; title: string } }>>(() => import('./components/UserList.hbs'));
+  Repositories = new LazyComponentWrapper<IRepositoriesLoader>(() => import('./components/RepositoriesLoader'));
+  Icon = new LazyComponentWrapper<TemplateComponent>(() => import('./components/LazyIcon.hbs'));
+  UserList = new LazyComponentWrapper<TemplateComponent<{ Args: { logo: string; title: string } }>>(() => import('./components/UserList.hbs'));
   assets = { logo };
   static template = hbs`
   <section class="text-gray-600 body-font">
@@ -113,14 +84,19 @@ export default class App extends Component<{}> {
         <HelloWorld />
         <Heading @bundlerName={{this.bundlerName}} />
         <DocumentationLink />
-        {{#if this.notes.loading}}
-          Loading notes
+
+        {{#if this.Repositories.isLoaded}}
+          <this.Repositories.Component @login={{this.bundlerName}} as |items|>
+            <div class="py-3 text-sm">
+              {{#each items as |repo|}}
+                <ListItem @name={{repo.name}} />
+              {{else}}
+                No data to show
+              {{/each}}
+            </div>
+          </this.Repositories.Component>
         {{else}}
-          <div class="py-3 text-sm">
-            {{#each this.repos as |repo|}}
-              <ListItem @name={{repo.name}} />
-            {{/each}}
-          </div>
+          Repos component is not loaded
         {{/if}}
         {{#if this.Icon.isLoaded}}
           <this.Icon.Component />

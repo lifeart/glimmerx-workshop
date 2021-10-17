@@ -1,4 +1,5 @@
 import { tracked  } from "@glimmerx/component";
+import Component from "@glint/environment-glimmerx/component";
 
 
 export default class LazyComponentWrapper<T> {
@@ -22,6 +23,7 @@ export default class LazyComponentWrapper<T> {
         } catch(e) {
             this.isLoading = false;
             this.isError = true;
+            console.error(e);
         }
     }
 }
