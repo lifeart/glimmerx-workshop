@@ -1,0 +1,14 @@
+diff --git a/node_modules/els-addon-glint/index.js b/node_modules/els-addon-glint/index.js
+index 93e785d..41661e7 100644
+--- a/node_modules/els-addon-glint/index.js
++++ b/node_modules/els-addon-glint/index.js
+@@ -132,6 +132,9 @@ module.exports = class ElsAddonQunitTestRunner {
+     }
+     async onComplete(_, params) {
+         const results = await this.languageServer.getCompletions(params.textDocument.uri, params.position);
++        if (results.length > 50) {
++            return params.results;
++        }
+         return [
+             ...results || [],
+             ...params.results
