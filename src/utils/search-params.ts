@@ -1,4 +1,7 @@
 export function getSearchValues() {
+    if (!('window' in globalThis)) {
+        return {};
+    }
     const values: Record<string, string> = window.location.search.replace('?', '').split('&').reduce((acc, el) => {
         const [key, val] = el.split('=');
         if (key.trim().length) {
