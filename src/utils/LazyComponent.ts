@@ -1,7 +1,4 @@
 import { tracked  } from "@glimmerx/component";
-import Component from "@glint/environment-glimmerx/component";
-
-
 export default class LazyComponentWrapper<T> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     constructor(private fn: () => Promise<any>) {

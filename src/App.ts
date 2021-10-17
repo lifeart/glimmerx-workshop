@@ -38,16 +38,21 @@ const ListItem: TemplateComponent<ListItemParams> = hbs`
 `;
 
 
+function initApollo(context: any) {
+  if (('window' in globalThis)) {
+    import('./configs/apollo').then((result) => {
+      result.default(context);
+      context.Repositories.loadComponent();
+    });
+  }
+}
+
 
 export default class App extends Component<{}> {
-  constructor() {
-    super(...arguments);
-    if (('window' in globalThis)) {
-      import('./configs/apollo').then((result) => {
-        result.default(this);
-        this.Repositories.loadComponent();
-      });
-    }
+  constructor(owner: any, args: Record<string, unknown>) {
+    // @ts-ignore
+    super(owner, args);
+    initApollo(this);
   }
   @tracked _bundlerName = getSearchValues().bundler ?? 'vite';
   @tracked selectedNote: any;

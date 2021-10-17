@@ -50,8 +50,7 @@ export default class RepositoriesLoader extends Component<IRepositoriesLoader> {
         {
             variables: { login: this.args.login },
             onComplete: (): void => {
-               console.log('on complete');
-               console.log(this);
+                // on complete
             }
         }
     ]);
