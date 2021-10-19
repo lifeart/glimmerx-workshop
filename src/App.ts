@@ -12,13 +12,13 @@ import type { TemplateComponent } from '@glint/environment-glimmerx/component';
 import HelloWorld from "./components/HelloWorld.hbs";
 
 import LazyComponentWrapper from "./utils/LazyComponent";
-import { getSearchValues, setSearchValue } from "./utils/search-params";
+import { getSearchValue, setSearchValue } from "./utils/search-params";
 import type IRepositoriesLoader from './components/RepositoriesLoader';
 import { Page, Router } from '@lifeart/tiny-router';
 import setupApolloClient from './configs/apollo';
 
 // @ts-ignore
-const Heading: TemplateComponent<{ Args: { bundlerName: string } }> = hbs`<h1>Hello {{@bundlerName}}!</h1>`;
+const Heading: TemplateComponent<{ Args: { contributorName: string } }> = hbs`<h1>Hello {{@contributorName}}!</h1>`;
 
 // @ts-ignore
 const RepoLink: TemplateComponent<{}> = hbs`<a ...attributes href="https://github.com/{{@login}}/{{@repo}}" target="_blank" rel="noopener noreferrer">{{@repo}}</a>`;
@@ -55,14 +55,14 @@ export default class App extends Component<{}> {
     return this?.model?.component ?? HelloWorld;
   }
 
-  @tracked _bundlerName = getSearchValues().bundler ?? 'vite';
+  @tracked _contributorName = getSearchValue('contributor','vite');
 
-  get bundlerName() {
-    return this._bundlerName;
+  get contributorName() {
+    return this._contributorName as string;
   }
-  set bundlerName(value) {
-    setSearchValue('bundler', value);
-    this._bundlerName = value;
+  set contributorName(value: string) {
+    setSearchValue('contributor', value);
+    this._contributorName = value;
   }
   Repositories = new LazyComponentWrapper<IRepositoriesLoader>(() => import('./components/RepositoriesLoader'));
   Icon = new LazyComponentWrapper<TemplateComponent>(() => import('./components/LazyIcon.hbs'));
@@ -83,21 +83,21 @@ export default class App extends Component<{}> {
             {{!-- template-lint-disable require-input-label --}}
             <input
               class="shadow mt-2 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              {{on 'input' this.updateValue}} value={{this.bundlerName}} />
+              {{on 'input' this.updateValue}} value={{this.contributorName}} />
           </div>
         </div>
-        <Heading @bundlerName={{this.bundlerName}} />
+        <Heading @contributorName={{this.contributorName}} />
         [
-          <a href="/user/{{this.bundlerName}}">second</a> |
+          <a href="/user/{{this.contributorName}}">second</a> |
           <a href="/">main</a>
         ]
         <this.RouteComponent @model={{this.model}} />
 
         {{#if this.Repositories.isLoaded}}
-          <this.Repositories.Component @login={{this.bundlerName}} as |items|>
+          <this.Repositories.Component @login={{this.contributorName}} as |items|>
             <div class="py-3 text-sm">
               {{#each items as |repo|}}
-                <ListItem @login={{this.bundlerName}} @name={{repo.name}} />
+                <ListItem @login={{this.contributorName}} @name={{repo.name}} />
               {{else}}
                 No data to show
               {{/each}}
@@ -114,7 +114,7 @@ export default class App extends Component<{}> {
           Loading error..
         {{/if}}
         {{#if this.UserList.isLoaded}}
-          <this.UserList.Component @logo={{this.assets.logo}} @title={{this.bundlerName}} />
+          <this.UserList.Component @logo={{this.assets.logo}} @title={{this.contributorName}} />
         {{/if}}
       </div>
     </div>
@@ -122,14 +122,14 @@ export default class App extends Component<{}> {
 
     `;
   @action updateValue(event: Event) {
-    this.bundlerName = (event.target as HTMLInputElement).value;
-    if (this.bundlerName === "icon") {
+    this.contributorName = (event.target as HTMLInputElement).value;
+    if (this.contributorName === "icon") {
       this.Icon.loadComponent();
-    } else if (this.bundlerName === "-icon") {
+    } else if (this.contributorName === "-icon") {
       this.Icon.unloadComponent();
-    } else if (this.bundlerName === "user") {
+    } else if (this.contributorName === "user") {
       this.UserList.loadComponent();
-    } else if (this.bundlerName === "-user") {
+    } else if (this.contributorName === "-user") {
       this.UserList.unloadComponent();
     }
   }
