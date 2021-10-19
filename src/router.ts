@@ -25,7 +25,7 @@ router.addResolver('user', async (params: RouteParams) => {
     const result = useQuery<IListOfRepositoriesQuery>(router, () => [
         ListOfRepositoriesQuery,
         {
-            variables: { login: params.login ?? 'lifeart' }
+            variables: { login: params.login.split('?')[0] ?? 'lifeart' }
         }
     ]);  
 

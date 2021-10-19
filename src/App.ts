@@ -44,8 +44,15 @@ export default class App extends Component<{}> {
   constructor(owner: any, args: Record<string, unknown>) {
     // @ts-ignore
     super(owner, args);
+    this.router.addHandler((page, model) => {
+      console.log(page, model);
+      this.page = page;
+      this.model = model;
+    });
     setupApolloClient(this);
-    this.Repositories.loadComponent();
+    setTimeout(() => {
+      this.Repositories.loadComponent();
+    }, 5000);
   }
   @tracked page!: Page;
   @tracked model!: any;
@@ -104,8 +111,16 @@ export default class App extends Component<{}> {
             </div>
           </this.Repositories.Component>
         {{else}}
-          Repos component is not loaded
+            <div class="py-3 text-sm">
+              {{#each this.model.data as |repo|}}
+                <ListItem @login={{this.contributorName}} @name={{repo.name}} />
+              {{/each}}
+            </div>
         {{/if}}
+
+     
+
+
         {{#if this.Icon.isLoaded}}
           <this.Icon.Component />
         {{else if this.Icon.isLoading}}
