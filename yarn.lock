@@ -1595,10 +1595,10 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.0.tgz"
   integrity sha512-wdppn25U8z/2yiaT6YGquE6X8sSv7hNMWSXYSSU1jGv/yd6XqjXgTDJ8KP4NgjTXfJ3GbRjeeb8RTV7a/VpM+w==
 
-"@lifeart/tiny-router@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@lifeart/tiny-router/-/tiny-router-0.0.3.tgz#35e910efdddf5667375163585baed586a53e9bc9"
-  integrity sha512-Hh4nMFOmQ44Je5/KjluZbwsSKMFUnK/irfZJFfNtovBgvFrlPcRE5xXiBDFn8XbR3kaWHlUXS4qH7l/l2DzcMA==
+"@lifeart/tiny-router@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@lifeart/tiny-router/-/tiny-router-0.0.5.tgz#875c09a7c718c722d1b99cdf967dfa15acf95685"
+  integrity sha512-hapaJErcuYqdVp3ODAYzHf0fqxH51mQDmLAxJxXtS3R6+FPGNol1XI95ZtwvYlBEnjUlQhgqLkv1EO0ugPE00Q==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
