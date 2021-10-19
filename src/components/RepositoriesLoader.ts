@@ -10,7 +10,7 @@ export type RepoNode = {
     name: string;
 };
 
-type IListOfRepositoriesQuery = {
+export type IListOfRepositoriesQuery = {
     repositoryOwner: {
         login: string;
         repositories: {
@@ -20,7 +20,7 @@ type IListOfRepositoriesQuery = {
 };
 
 
-const ListOfRepositoriesQuery = gql`
+export const ListOfRepositoriesQuery = gql`
     query ListOfRepositories($login: String!) {
         repositoryOwner(login: $login) {
             login

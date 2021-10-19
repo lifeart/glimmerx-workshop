@@ -1,4 +1,5 @@
 import { hbs, tracked } from '@glimmerx/component';
+import { service } from '@glimmerx/service';
 
 import { action } from '@glimmerx/modifier';
 import logo from "./assets/glimmer-logo.png";
@@ -13,6 +14,8 @@ import HelloWorld from "./components/HelloWorld.hbs";
 import LazyComponentWrapper from "./utils/LazyComponent";
 import { getSearchValues, setSearchValue } from "./utils/search-params";
 import type IRepositoriesLoader from './components/RepositoriesLoader';
+import { Page, Router } from '@lifeart/tiny-router';
+import setupApolloClient from './configs/apollo';
 
 // @ts-ignore
 const Heading: TemplateComponent<{ Args: { bundlerName: string } }> = hbs`<h1>Hello {{@bundlerName}}!</h1>`;
@@ -37,25 +40,22 @@ const ListItem: TemplateComponent<ListItemParams> = hbs`
     </div>
 `;
 
-
-function initApollo(context: any) {
-  if (('window' in globalThis)) {
-    import('./configs/apollo').then((result) => {
-      result.default(context);
-      context.Repositories.loadComponent();
-    });
-  }
-}
-
-
 export default class App extends Component<{}> {
   constructor(owner: any, args: Record<string, unknown>) {
     // @ts-ignore
     super(owner, args);
-    initApollo(this);
+    setupApolloClient(this);
+    this.Repositories.loadComponent();
   }
+  @tracked page!: Page;
+  @tracked model!: any;
+  @service router!: Router;
+
+  get RouteComponent() {
+    return this?.model?.component ?? HelloWorld;
+  }
+
   @tracked _bundlerName = getSearchValues().bundler ?? 'vite';
-  @tracked selectedNote: any;
 
   get bundlerName() {
     return this._bundlerName;
@@ -86,8 +86,12 @@ export default class App extends Component<{}> {
               {{on 'input' this.updateValue}} value={{this.bundlerName}} />
           </div>
         </div>
-        <HelloWorld />
         <Heading @bundlerName={{this.bundlerName}} />
+        [
+          <a href="/second">second</a> |
+          <a href="/">main</a>
+        ]
+        <this.RouteComponent @model={{this.model}} />
         <DocumentationLink />
 
         {{#if this.Repositories.isLoaded}}

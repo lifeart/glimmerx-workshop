@@ -1117,6 +1117,13 @@
     "@glimmer/validator" "0.77.6"
     "@simple-dom/interface" "^1.4.0"
 
+"@glimmer/debug@2.0.0-beta.17":
+  version "2.0.0-beta.17"
+  resolved "https://registry.yarnpkg.com/@glimmer/debug/-/debug-2.0.0-beta.17.tgz#36663ce774f56e829ff0747e5ff6859f72c62eb5"
+  integrity sha512-7+hIeztKB1tpYCGMjDypoNGLv4Kd2KXYmK4yeWMLftX7ZMISJW/8oUWztWd3eakxRLP3rCKloHTMsL2s2ptyXQ==
+  dependencies:
+    "@glimmer/global-context" "0.77.6"
+
 "@glimmer/destroyable@0.77.3":
   version "0.77.3"
   resolved "https://registry.npmjs.org/@glimmer/destroyable/-/destroyable-0.77.3.tgz"
@@ -1419,23 +1426,7 @@
     "@glimmer/interfaces" "0.77.6"
     "@simple-dom/interface" "^1.4.0"
 
-"@glimmer/validator@0.65.3", "@glimmer/validator@^0.65.0":
-  version "0.65.3"
-  resolved "https://registry.yarnpkg.com/@glimmer/validator/-/validator-0.65.3.tgz#4eb59548800affaaf3e301f4e2d0f131e614f2b2"
-  integrity sha512-XoQ+5fN4MLzbS5uhAnaQzbgC7du2rgznTlM7W4WH+97ijHZ8JU5j6+3LIrwwZPPgVPlLlg8z3y6Wv3gEIQMpNA==
-  dependencies:
-    "@glimmer/env" "^0.1.7"
-    "@glimmer/global-context" "0.65.3"
-
-"@glimmer/validator@0.77.3":
-  version "0.77.3"
-  resolved "https://registry.npmjs.org/@glimmer/validator/-/validator-0.77.3.tgz"
-  integrity sha512-e/eUJszfBrr0wQkW1+vsiP8Sa+S7oBuSa1XPh1b7maGUNkWpk49THERfyULsWYGzrl5iYHWmM+Cl6proAXdI6g==
-  dependencies:
-    "@glimmer/env" "^0.1.7"
-    "@glimmer/global-context" "0.77.3"
-
-"@glimmer/validator@0.77.6", "@glimmer/validator@^0.77.6":
+"@glimmer/validator@0.65.3", "@glimmer/validator@0.77.3", "@glimmer/validator@0.77.6", "@glimmer/validator@^0.65.0", "@glimmer/validator@^0.77.6":
   version "0.77.6"
   resolved "https://registry.npmjs.org/@glimmer/validator/-/validator-0.77.6.tgz"
   integrity sha512-ZybFdN3Oc/qzwPNsu7GOf+9FylJyVv+QqGcXeE+eN5wkwv5RxhUZxpo+vdag47r6MVfsZvQlsbmGndwr5LkGjw==
@@ -1486,7 +1477,7 @@
     ember-cli-version-checker "5.1.2"
     ember-template-imports "^1.1.1"
 
-"@glimmerx/core@^0.6.5":
+"@glimmerx/core@0.6.5", "@glimmerx/core@^0.6.5":
   version "0.6.5"
   resolved "https://registry.npmjs.org/@glimmerx/core/-/core-0.6.5.tgz"
   integrity sha512-Qa8PUVzs5HVyrPqkcqBgz/BrW6qtutradOLt1NVgtKEO2mzdQAhaiAlMYRAG6PpSQH+CutcAmE/zGVXiDlCnSA==
@@ -1507,6 +1498,16 @@
   dependencies:
     "@glimmer/core" "2.0.0-beta.17"
     "@glimmer/modifier" "2.0.0-beta.17"
+    ember-cli-babel "7.26.2"
+
+"@glimmerx/service@^0.6.5":
+  version "0.6.5"
+  resolved "https://registry.yarnpkg.com/@glimmerx/service/-/service-0.6.5.tgz#f1ae422574c45a1c86b05550bec81a37ca902cd9"
+  integrity sha512-VK3qA1JAow68AJb0s+MPJyjiGeYm/ZDlGPlfCmJmnEt4Gku4HulXx/VnEUSDrhuP+AzO3gWe1cpEbUNBiUYCzA==
+  dependencies:
+    "@glimmer/debug" "2.0.0-beta.17"
+    "@glimmer/env" "^0.1.7"
+    "@glimmerx/core" "0.6.5"
     ember-cli-babel "7.26.2"
 
 "@glimmerx/ssr@^0.6.5":
@@ -1593,6 +1594,11 @@
   version "1.2.0"
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.0.tgz"
   integrity sha512-wdppn25U8z/2yiaT6YGquE6X8sSv7hNMWSXYSSU1jGv/yd6XqjXgTDJ8KP4NgjTXfJ3GbRjeeb8RTV7a/VpM+w==
+
+"@lifeart/tiny-router@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@lifeart/tiny-router/-/tiny-router-0.0.3.tgz#35e910efdddf5667375163585baed586a53e9bc9"
+  integrity sha512-Hh4nMFOmQ44Je5/KjluZbwsSKMFUnK/irfZJFfNtovBgvFrlPcRE5xXiBDFn8XbR3kaWHlUXS4qH7l/l2DzcMA==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -2657,6 +2663,13 @@ cosmiconfig@^7.0.1:
     parse-json "^5.0.0"
     path-type "^4.0.0"
     yaml "^1.10.0"
+
+cross-fetch@^3.1.4:
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.1.4.tgz#9723f3a3a247bf8b89039f3a380a9244e8fa2f39"
+  integrity sha512-1eAtFWdIubi6T4XPy6ei9iUFoKpUkIF971QLN8lIvvvwueI65+Nw5haMNKUwfJxabqlIIDODJKGrQ66gxC0PbQ==
+  dependencies:
+    node-fetch "2.6.1"
 
 cross-spawn@^6.0.5:
   version "6.0.5"
@@ -3795,10 +3808,10 @@ get-symbol-description@^1.0.0:
     call-bind "^1.0.2"
     get-intrinsic "^1.1.1"
 
-glimmer-apollo@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/glimmer-apollo/-/glimmer-apollo-0.4.0.tgz#fa116f3d90a904f6f2d3e1ce5eaef9c1c47e946a"
-  integrity sha512-ewpcMwEQvgj4Bn1IOK7nwVJcu8riKRg9pASdS3fOa0bWi7z94dhmx7hqXiMfokQf0e0o3reE2Zc9yNqxs7JV5Q==
+glimmer-apollo@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/glimmer-apollo/-/glimmer-apollo-0.4.1.tgz#240a3096cf7405dfd1771f9e1fd3c8379090fb10"
+  integrity sha512-Db99dpEZFBP4+cHMpydNgJUqa6glp7epR7WURZSz8NZOyWhNE2xgn70ebMuIfQxmcaAiWEG4tNC7adg0mSGjTQ==
   dependencies:
     "@ember/test-waiters" "^3.0.0"
     "@embroider/addon-shim" "^0.44.1"
@@ -4697,6 +4710,11 @@ node-emoji@^1.11.0:
   integrity sha512-wo2DpQkQp7Sjm2A0cq+sN7EHKO6Sl0ctXeBdFZrL9T9+UywORbufTcTZxom8YqpLQt/FqNMUkOpkZrJVYSKD3A==
   dependencies:
     lodash "^4.17.21"
+
+node-fetch@2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
+  integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
 
 node-releases@^1.1.77:
   version "1.1.77"
