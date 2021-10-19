@@ -10,11 +10,13 @@
     "postinstall": "patch-package"
   },
   "resolutions": {
-    "**/@glimmer/validator": "0.77.6"
+    "**/@glimmer/validator": "0.77.6",
+    "**/@glimmer/owner": "0.77.6"
   },
   "devDependencies": {
     "@apollo/client": "^3.4.16",
     "@glimmer/validator": "0.77.6",
+    "@glimmer/owner": "0.77.6",
     "@glimmerx/eslint-plugin": "^0.6.5",
     "@glimmerx/service": "^0.6.5",
     "@glimmerx/ssr": "^0.6.5",

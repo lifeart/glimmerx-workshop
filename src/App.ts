@@ -88,7 +88,7 @@ export default class App extends Component<{}> {
         </div>
         <Heading @bundlerName={{this.bundlerName}} />
         [
-          <a href="/second">second</a> |
+          <a href="/user/{{this.bundlerName}}">second</a> |
           <a href="/">main</a>
         ]
         <this.RouteComponent @model={{this.model}} />
