@@ -21,7 +21,7 @@ import setupApolloClient from './configs/apollo';
 const Heading: TemplateComponent<{ Args: { bundlerName: string } }> = hbs`<h1>Hello {{@bundlerName}}!</h1>`;
 
 // @ts-ignore
-const DocumentationLink: TemplateComponent<{}> = hbs`<a href="https://vitejs.dev/guide/features.html" target="_blank" rel="noopener noreferrer">Documentation</a>`;
+const RepoLink: TemplateComponent<{}> = hbs`<a ...attributes href="https://github.com/{{@login}}/{{@repo}}" target="_blank" rel="noopener noreferrer">{{@repo}}</a>`;
 
 
 interface ListItemParams {
@@ -35,7 +35,7 @@ const ListItem: TemplateComponent<ListItemParams> = hbs`
     <div
       class="flex justify-start cursor-pointer text-gray-700 hover:text-blue-400 hover:bg-blue-100 rounded-md px-2 py-2 my-2">
       <span class="bg-green-600 h-2 w-2 m-2 rounded-full"></span>
-      <div class="flex-grow font-mono px-2 text-left">{{@name}}</div>
+      <RepoLink class="flex-grow font-mono px-2 text-left" @login={{@login}} @repo={{@name}} />
       <div class="text-sm font-normal text-gray-500 tracking-wide">Team</div>
     </div>
 `;
@@ -92,13 +92,12 @@ export default class App extends Component<{}> {
           <a href="/">main</a>
         ]
         <this.RouteComponent @model={{this.model}} />
-        <DocumentationLink />
 
         {{#if this.Repositories.isLoaded}}
           <this.Repositories.Component @login={{this.bundlerName}} as |items|>
             <div class="py-3 text-sm">
               {{#each items as |repo|}}
-                <ListItem @name={{repo.name}} />
+                <ListItem @login={{this.bundlerName}} @name={{repo.name}} />
               {{else}}
                 No data to show
               {{/each}}
