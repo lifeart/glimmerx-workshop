@@ -22,18 +22,14 @@ setupApolloClient(router);
 
 router.addResolver('user', async (params: RouteParams) => {
   const LazyIcon = await (await import('./components/LazyIcon.hbs')).default;
-    console.log(params, params.login);
     const result = useQuery<IListOfRepositoriesQuery>(router, () => [
         ListOfRepositoriesQuery,
         {
-            variables: { login: params.login ?? 'lifeart' },
-            onComplete: (): void => {
-                // on complete
-            }
+            variables: { login: params.login ?? 'lifeart' }
         }
     ]);  
 
     await result.promise;
-    console.log(result.data);
-    return { component: LazyIcon };
+    const data = result.data?.repositoryOwner?.repositories.nodes || [];
+    return { component: LazyIcon, data };
 });
