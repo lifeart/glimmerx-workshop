@@ -9,6 +9,11 @@
         "lifeart.vscode-ember-unstable"
     ],
     "unwantedRecommendations": [
+        "eg2.vscode-npm-script",
+        "vscodevim.vim",
+        "dotjoshjohnson.xml",
+        "vscjava.vscode-maven",
+        "vscjava.vscode-java-pack",
         "bierner.lit-html",
         "octref.vetur",
         "ms-vscode-remote.remote-containers",
