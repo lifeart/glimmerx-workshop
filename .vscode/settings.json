@@ -2,5 +2,8 @@
     "editor.showUnused": false,
     "hbs.tags": [
         "hbs"
+    ],
+    "cSpell.words": [
+        "glimmerx"
     ]
 }

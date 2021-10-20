@@ -16,6 +16,7 @@ import { getSearchValue, setSearchValue } from "./utils/search-params";
 import type IRepositoriesLoader from './components/RepositoriesLoader';
 import { Page, Router } from '@lifeart/tiny-router';
 import setupApolloClient from './configs/apollo';
+import StackedRouter from './components/StackedRouter';
 
 // @ts-ignore
 const Heading: TemplateComponent<{ Args: { contributorName: string } }> = hbs`<h1>Hello {{@contributorName}}!</h1>`;
@@ -44,18 +45,20 @@ export default class App extends Component<{}> {
   constructor(owner: any, args: Record<string, unknown>) {
     // @ts-ignore
     super(owner, args);
-    this.router.addHandler((page, model) => {
-      console.log(page, model);
+    this.router.addHandler((page, model, stack) => {
+      console.log(page, model, stack);
       this.page = page;
       this.model = model;
+      this.stack = stack;
     });
     setupApolloClient(this);
-    setTimeout(() => {
-      this.Repositories.loadComponent();
-    }, 5000);
+    // setTimeout(() => {
+    //   this.Repositories.loadComponent();
+    // }, 5000);
   }
   @tracked page!: Page;
   @tracked model!: any;
+  @tracked stack!: any;
   @service router!: Router;
 
   get RouteComponent() {
@@ -80,6 +83,7 @@ export default class App extends Component<{}> {
     <div class="container px-5 py-24 mx-auto">
       <div class="xl:w-1/2 lg:w-3/4 w-full mx-auto text-center">
         <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Hello, Holy!</h1>
+        <StackedRouter @stack={{this.stack}} @params={{this.page.params}} />
         <div class="flex">
           <div>
             {{!-- template-lint-disable require-valid-alt-text --}}
@@ -95,7 +99,7 @@ export default class App extends Component<{}> {
         </div>
         <Heading @contributorName={{this.contributorName}} />
         [
-          <a href="/user/{{this.contributorName}}">second</a> |
+          <a href="/users/{{this.contributorName}}">second</a> |
           <a href="/">main</a>
         ]
         <this.RouteComponent @model={{this.model}} />
