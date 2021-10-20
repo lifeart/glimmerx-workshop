@@ -42,6 +42,7 @@
     "@glimmerx/component": "^0.6.5",
     "@glimmerx/core": "^0.6.5",
     "@glimmerx/modifier": "^0.6.5",
+    "@glimmerx/helper": "^0.6.5",
     "cross-fetch": "^3.1.4",
     "patch-package": "^6.4.7",
     "postinstall-postinstall": "^2.1.0",

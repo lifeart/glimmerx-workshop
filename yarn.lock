@@ -1179,6 +1179,15 @@
   dependencies:
     "@glimmer/env" "^0.1.7"
 
+"@glimmer/helper@2.0.0-beta.17":
+  version "2.0.0-beta.17"
+  resolved "https://registry.yarnpkg.com/@glimmer/helper/-/helper-2.0.0-beta.17.tgz#fb5d29b1d3a253f18ba971c6a8e37f8452d0bdd1"
+  integrity sha512-u4n6IpSz2ewUQ93L7ecsG0m6uAXaO3d+LvbBa4Dg7MHqNVNZbC1grmOw78oZc2KWv7FdZmLCSK0R0umfXyL92w==
+  dependencies:
+    "@glimmer/component" "2.0.0-beta.17"
+    "@glimmer/core" "2.0.0-beta.17"
+    "@glimmer/runtime" "0.77.6"
+
 "@glimmer/interfaces@0.65.3":
   version "0.65.3"
   resolved "https://registry.yarnpkg.com/@glimmer/interfaces/-/interfaces-0.65.3.tgz#ef3df40b42ab8b6dc36efea81652abddda72f23c"
@@ -1490,6 +1499,16 @@
   version "0.6.5"
   resolved "https://registry.npmjs.org/@glimmerx/eslint-plugin/-/eslint-plugin-0.6.5.tgz"
   integrity sha512-HaWGzWIn1NDpPYBe70rIvHcAU2QUQ3hD4mOvCJ0o9A3eQaJQAKuZe2NAO9x53bvzAT5yR8z32WVZ0tJSMn8J7Q==
+
+"@glimmerx/helper@^0.6.5":
+  version "0.6.5"
+  resolved "https://registry.yarnpkg.com/@glimmerx/helper/-/helper-0.6.5.tgz#a4690b6d9e46539aa38f3c30f31be1f34abd174e"
+  integrity sha512-e1RFm+FbromABkxOqMpDuT9ez7CcH/M8eJ56S6Dn0SiHNZ4PbANkFXaqMIGo0fxx0aKOOICkcQdikZ6Qp9Ye+A==
+  dependencies:
+    "@glimmer/helper" "2.0.0-beta.17"
+    "@glimmer/interfaces" "0.77.3"
+    "@glimmerx/core" "0.6.5"
+    ember-cli-babel "7.26.2"
 
 "@glimmerx/modifier@^0.6.5":
   version "0.6.5"
