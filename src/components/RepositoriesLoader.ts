@@ -7,6 +7,7 @@ import Component from '@glint/environment-glimmerx/component';
 export type RepoNode = {
     description: string;
     id: string;
+    login?: string;
     name: string;
 };
 

@@ -1,0 +1,12 @@
+<div class="py-3 text-sm">
+    {{#each @model as |repo|}}
+        <div
+        class="flex justify-start cursor-pointer text-gray-700 hover:text-blue-400 hover:bg-blue-100 rounded-md px-2 py-2 my-2">
+        <span class="bg-green-600 h-2 w-2 m-2 rounded-full"></span>
+            <a class="flex-grow font-mono px-2 text-left" href="https://github.com/{{repo.login}}/{{repo.name}}" >{{repo.name}}</a>
+            <div class="text-sm font-normal text-gray-500 tracking-wide">{{repo.description}}</div>
+        </div>
+    {{else}}
+        <h3>no data to show [{{@route}}]</h3>
+    {{/each}}
+</div>

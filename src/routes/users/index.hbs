@@ -1,0 +1,10 @@
+{{#each @model as |login|}}
+    <a href="/users/{{login}}">{{login}}</a>
+{{/each}}
+
+
+{{#if @hasChildren}}
+    {{yield}}
+{{else}}
+    No user selected to go with...
+{{/if}}

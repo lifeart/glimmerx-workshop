@@ -1,13 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import fetch from 'cross-fetch';
 import { setClient } from 'glimmer-apollo';
+import { setOwner, getOwner }  from '@glimmer/owner';
+
 import {
   ApolloClient,
   InMemoryCache,
   createHttpLink
 } from '@apollo/client/core';
 
-export default function setupApolloClient(context: unknown): void {
+const defaultOwner = {};
+
+
+export default function setupApolloClient(context: object): void {
+
+  if (!getOwner(context)) {
+    setOwner(context, defaultOwner);
+  }
+
   // HTTP connection to the API
   const httpLink = createHttpLink({
     uri: 'https://api.github.com/graphql',

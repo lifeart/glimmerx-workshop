@@ -7,7 +7,8 @@ import logo from "./assets/glimmer-logo.png";
 import Component from '@glint/environment-glimmerx/component';
 import { on } from '@glint/environment-glimmerx/modifier';
 import type { TemplateComponent } from '@glint/environment-glimmerx/component';
-
+import UsersRoute from './routes/users/index.hbs';
+import UserRoute from './routes/users/user/index.hbs';
 
 import HelloWorld from "./components/HelloWorld.hbs";
 
@@ -45,20 +46,20 @@ export default class App extends Component<{}> {
   constructor(owner: any, args: Record<string, unknown>) {
     // @ts-ignore
     super(owner, args);
-    this.router.addHandler((page, model, stack) => {
-      console.log(page, model, stack);
-      this.page = page;
-      this.model = model;
-      this.stack = stack;
-    });
     setupApolloClient(this);
     // setTimeout(() => {
     //   this.Repositories.loadComponent();
     // }, 5000);
   }
-  @tracked page!: Page;
-  @tracked model!: any;
-  @tracked stack!: any;
+  get page() {
+    return this.router.activeRoute?.page;
+  }
+  get model() {
+    return this.router.activeRoute?.data;
+  }
+  get stack() {
+    return this.router.stack;
+  }
   @service router!: Router;
 
   get RouteComponent() {
@@ -78,12 +79,16 @@ export default class App extends Component<{}> {
   Icon = new LazyComponentWrapper<TemplateComponent>(() => import('./components/LazyIcon.hbs'));
   UserList = new LazyComponentWrapper<TemplateComponent<{ Args: { logo: string; title: string } }>>(() => import('./components/UserList.hbs'));
   assets = { logo };
+  components = {
+    'users': UsersRoute,
+    'users.user': UserRoute
+  }
   static template = hbs`
   <section class="text-gray-600 body-font">
     <div class="container px-5 py-24 mx-auto">
       <div class="xl:w-1/2 lg:w-3/4 w-full mx-auto text-center">
         <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Hello, Holy!</h1>
-        <StackedRouter @stack={{this.stack}} @params={{this.page.params}} />
+        <StackedRouter @components={{this.components}} @stack={{this.stack}} @params={{this.page.params}} />
         <div class="flex">
           <div>
             {{!-- template-lint-disable require-valid-alt-text --}}

@@ -1,44 +1,41 @@
 import { RouteParams, Router } from '@lifeart/tiny-router';
-import { setOwner }  from '@glimmer/owner';
-
-const owner = {};
-
-
 import { useQuery } from 'glimmer-apollo';
 import { IListOfRepositoriesQuery, ListOfRepositoriesQuery } from './components/RepositoriesLoader';
 import setupApolloClient from './configs/apollo';
+import { tracked } from '@glimmerx/component';
+
+class GlimmerRouter extends Router {
+  @tracked stack = [];
+  @tracked prevRoute = null;
+  @tracked activeRoute = null;
+}
 
 
-
-export const router = new Router({
+export const router = new GlimmerRouter({
   main: '',
   "users": "/users",
   "users.user": '/users/:login'
 });
 
-setOwner(router, owner);
-
 setupApolloClient(router);
 
 
-router.addResolver('user', async (params: RouteParams) => {
+router.addResolver('users.user', async (params: RouteParams) => {
     const result = useQuery<IListOfRepositoriesQuery>(router, () => [
         ListOfRepositoriesQuery,
         {
-            variables: { login: params.login ?? 'lifeart' }
+            variables: { login: params.login  }
         }
     ]);  
 
     await result.promise;
     const data = result.data?.repositoryOwner?.repositories.nodes || [];
-    return data;
+    return data.map(e => {
+      return {...e, ...{ login: params.login }}
+    })
 });
 
 
 router.addResolver('users', async () => {
   return ["lifeart", "wycatz", "tomdale"];
-});
-
-router.addResolver('users.user', async (params: RouteParams) => {
-  return router._resolveRoute('user', params, {});
 });
