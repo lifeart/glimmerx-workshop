@@ -13,6 +13,7 @@ https://github.com/pzuraq/tracked-built-ins
  1. https://github.com/vitejs/vite/issues/5364
  1. https://github.com/glimmerjs/glimmer-vm/issues/1359
  1. https://github.com/glimmerjs/glimmer.js/issues/365
+ 1. https://github.com/glimmerjs/glimmer-vm/issues/1360
  1. https://github.com/josemarluedke/glimmer-apollo/issues/45
  1. https://github.com/josemarluedke/glimmer-apollo/issues/48
  1. https://github.com/josemarluedke/glimmer-apollo/issues/49
