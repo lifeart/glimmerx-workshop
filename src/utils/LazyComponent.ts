@@ -7,20 +7,39 @@ export default class LazyComponentWrapper<T> {
     @tracked isError = false;
     @tracked isLoaded = false;
     @tracked Component!: T;
+    _isLoaded = false;
+    _isLoading = false;
     unloadComponent() {
         this.isLoaded = false;
     }
+    preload() {
+        this.loadComponent();
+        return this;
+    }
     async loadComponent() {
+        if (this._isLoaded) {
+            return;
+        }
+        if (this._isLoading) {
+            return;
+        }
         try {
+            this.isError = false;
             this.isLoading = true;
+            this._isLoading = true;
+
             const result = await this.fn();
             this.Component = result.default;
             this.isLoaded = true;
             this.isLoading = false;
+            this._isLoaded = true;
         } catch(e) {
-            this.isLoading = false;
+
             this.isError = true;
             console.error(e);
+        } finally {
+            this.isLoading = false;
+            this._isLoading = false;
         }
     }
 }
