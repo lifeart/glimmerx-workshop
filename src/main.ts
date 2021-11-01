@@ -1,8 +1,9 @@
 import 'glimmer-apollo/environment-glimmer';
 
 import { renderComponent } from '@glimmerx/core';
-import App from './App';
+import App from './Pt3Slots';
 import { router } from './router';
+import './style.css';
 
 document.addEventListener(
   'DOMContentLoaded',
