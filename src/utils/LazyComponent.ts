@@ -11,6 +11,7 @@ export default class LazyComponentWrapper<T> {
     _isLoading = false;
     unloadComponent() {
         this.isLoaded = false;
+        this._isLoaded = false;
     }
     preload() {
         this.loadComponent();
