@@ -19,5 +19,28 @@ module.exports = {
         '@glimmerx/template-vars': 'error',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         "@typescript-eslint/ban-types": 'off'
-    }
+    },
+    "owerrides": [
+        {
+            files: [
+              './.eslintrc.js',
+              './.template-lintrc.js',
+              './server/**/*.js',
+            ],
+            parserOptions: {
+              sourceType: 'script',
+            },
+            env: {
+              browser: false,
+              node: true,
+            },
+            plugins: ['node'],
+            extends: ['plugin:node/recommended'],
+            rules: {
+              // this can be removed once the following is fixed
+              // https://github.com/mysticatea/eslint-plugin-node/issues/77
+              'node/no-unpublished-require': 'off',
+            },
+        }
+    ]
 };

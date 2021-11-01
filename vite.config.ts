@@ -7,6 +7,7 @@ import glimmerXPlugin from 'vite-plugin-glimmerx';
 export default defineConfig({
   plugins: [
     // visualizer(),
+    // @ts-expect-error unknown call signature
     glimmerXPlugin() as PluginOption
   ],
   build: {

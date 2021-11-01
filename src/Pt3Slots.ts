@@ -8,37 +8,27 @@ const Profile = hbs`
                     {{yield to="header"}}
                 {{else}}
                     {{#if @header}}
-                        {{@header}}
+                     {{@header}}
                     {{else}}
-                        [ Empty header ]
+                        [default header placeholder]
                     {{/if}}
                 {{/if}}
             </h2>
             <p class="text-grey-darker text-base">
-                {{#if (has-block "body")}}
-                    {{yield to="body"}}
-                {{else}}
-                    {{#if @body}}
-                        {{@body}}
-                    {{else}}
-                        [ Empty body ]
-                    {{/if}}
-                {{/if}}
+                {{yield 123 456}}
             </p>
         </div>
     </div>
 `;
 
-
-const Header = hbs`<pre>It's custom {{@name}} component</pre>`;
-
+const Header = hbs`<pre>I'm a {{@name}} text</pre>`;
 
 export default hbs`
     <div class="m-6">
-       <Profile @header={{component Header name="foo"}}>
-            <:body>
-                Body
-            </:body>
-       </Profile>
+        <Profile>
+            <:default as |foo boo|>
+                {{foo}} / {{boo}}
+            </:default>
+        </Profile>
     </div>
 `
