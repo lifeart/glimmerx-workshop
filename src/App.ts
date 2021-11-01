@@ -23,12 +23,16 @@ import StackedRouter from './components/StackedRouter';
 const Heading: TemplateComponent<{ Args: { contributorName: string } }> = hbs`<h1>Hello {{@contributorName}}!</h1>`;
 
 // @ts-ignore
-const RepoLink: TemplateComponent<{}> = hbs`<a ...attributes href="https://github.com/{{@login}}/{{@repo}}" target="_blank" rel="noopener noreferrer">{{@repo}}</a>`;
+const RepoLink: TemplateComponent<{Element: HTMLAnchorElement, Args: {
+  login: string;
+  repo: string;
+} }> = hbs`<a ...attributes href="https://github.com/{{@login}}/{{@repo}}" target="_blank" rel="noopener noreferrer">{{@repo}}</a>`;
 
 
 interface ListItemParams {
   Args: {
-    name: string
+    name: string;
+    login: string;
   }
 }
 
