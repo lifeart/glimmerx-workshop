@@ -11,7 +11,7 @@ import type { Router } from '@lifeart/tiny-router';
 import UsersRoute from './routes/users/index';
 import UserRoute from './routes/users/user/index.hbs';
 import LazyComponentWrapper from "./utils/LazyComponent";
-import StackedRouter from './components/StackedRouter';
+import NestedRouter from './components/NestedRouter';
 import logo from "./assets/glimmer-logo.png";
 
 
@@ -107,7 +107,7 @@ export default class App extends Component<{}> {
           @updateValue={{this.updateValue}} 
         />
       
-        <StackedRouter 
+        <NestedRouter 
           @components={{this.components}} 
           @stack={{this.stack}} 
           @params={{this.page.params}} />

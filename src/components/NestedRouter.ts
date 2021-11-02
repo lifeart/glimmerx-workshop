@@ -6,7 +6,7 @@ const DefaultRoute: TemplateComponent<{Args: { hasChildren: boolean }}> = hbs`
   {{#if @hasChildren}} {{yield}} {{/if}}
 `;
 
-export default class StackedRouter extends Component<{stack: { name: string, data: null | unknown }[], components?: Record<string, any>}> {
+export default class NestedRouter extends Component<{stack: { name: string, data: null | unknown }[], components?: Record<string, any>}> {
     get tail() {
       return this.parts.tail;
     }
@@ -31,7 +31,7 @@ export default class StackedRouter extends Component<{stack: { name: string, dat
     static template = hbs`
       {{#if @stack.length}}
         <this.Component @route={{this.route}} @hasChildren={{this.tail.length}} @model={{this.model}} @params={{@params}}>
-          <StackedRouter @components={{this.components}} @stack={{this.tail}} @params={{@params}} />
+          <NestedRouter @components={{this.components}} @stack={{this.tail}} @params={{@params}} />
         </this.Component>
       {{/if}}
     `
