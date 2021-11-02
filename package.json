@@ -7,22 +7,29 @@
     "build": "tsc && vite build",
     "lint": "eslint ./src",
     "serve": "vite preview",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "storybook": "start-storybook -p 6006 -s dist",
+    "build-storybook": "build-storybook -s dist"
   },
   "resolutions": {
     "**/@glimmer/validator": "0.77.6",
-    "**/@glimmer/owner": "0.77.6"
+    "**/@glimmer/owner": "0.77.6",
+    "**/@glimmer/manager": "0.77.6",
+    "**/@glimmer/reference": "0.77.6",
+    "**/@glimmer/util": "0.77.6"
   },
   "devDependencies": {
     "@apollo/client": "^3.4.16",
-    "@glimmer/validator": "0.77.6",
     "@glimmer/owner": "0.77.6",
+    "@glimmer/validator": "0.77.6",
     "@glimmerx/eslint-plugin": "^0.6.5",
     "@glimmerx/service": "^0.6.5",
     "@glimmerx/ssr": "^0.6.5",
+    "@glimmerx/storybook": "^0.6.5",
     "@glint/core": "^0.6.1",
     "@glint/environment-glimmerx": "^0.6.1",
     "@lifeart/tiny-router": "^0.0.8",
+    "@storybook/addon-essentials": "^6.1.21",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "autoprefixer": "^10.3.7",
@@ -34,6 +41,7 @@
     "graphql": "^15.6.1",
     "postcss": "^8.3.9",
     "rollup-plugin-visualizer": "^5.5.2",
+    "storybook-builder-vite": "^0.1.3",
     "tailwindcss": "^2.2.16",
     "typescript": "^4.3.2",
     "vite": "^2.6.13"
@@ -41,8 +49,8 @@
   "dependencies": {
     "@glimmerx/component": "^0.6.5",
     "@glimmerx/core": "^0.6.5",
-    "@glimmerx/modifier": "^0.6.5",
     "@glimmerx/helper": "^0.6.5",
+    "@glimmerx/modifier": "^0.6.5",
     "cross-fetch": "^3.1.4",
     "patch-package": "^6.4.7",
     "postinstall-postinstall": "^2.1.0",

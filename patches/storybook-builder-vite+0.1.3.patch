@@ -1,0 +1,15 @@
+diff --git a/node_modules/storybook-builder-vite/vite-config.js b/node_modules/storybook-builder-vite/vite-config.js
+index f9bde2d..4b61e59 100644
+--- a/node_modules/storybook-builder-vite/vite-config.js
++++ b/node_modules/storybook-builder-vite/vite-config.js
+@@ -65,5 +65,10 @@ module.exports.pluginConfig = function pluginConfig(options, type) {
+         );
+     }
+ 
++    if (framework === 'glimmerx') {
++        const plugin = require('vite-plugin-glimmerx/index.cjs');
++        plugins.push(plugin.default());
++    }
++
+     return plugins;
+ };
