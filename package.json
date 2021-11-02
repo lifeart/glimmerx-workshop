@@ -9,7 +9,8 @@
     "serve": "vite preview",
     "postinstall": "patch-package",
     "storybook": "start-storybook -p 6006 -s dist",
-    "build-storybook": "build-storybook -s dist"
+    "build-storybook": "build-storybook -s dist",
+    "test": "qunitx ./src/tests/basic.js"
   },
   "resolutions": {
     "**/@glimmer/validator": "0.77.6",
@@ -40,9 +41,11 @@
     "glimmer-apollo": "^0.4.1",
     "graphql": "^15.6.1",
     "postcss": "^8.3.9",
+    "qunitx": "^0.3.0",
     "rollup-plugin-visualizer": "^5.5.2",
     "storybook-builder-vite": "^0.1.3",
     "tailwindcss": "^2.2.16",
+    "ts-node": "^10.4.0",
     "typescript": "^4.3.2",
     "vite": "^2.6.13"
   },
@@ -56,6 +59,7 @@
     "postinstall-postinstall": "^2.1.0",
     "vite-plugin-glimmerx": "0.6.6"
   },
+  "type": "module",
   "volta": {
     "node": "16.11.0"
   }
