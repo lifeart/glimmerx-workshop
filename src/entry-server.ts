@@ -11,7 +11,7 @@ const app = hbs``;
 export async function render(url: string) {
     createSearchParams(url);
     await router.mount(url, true);
-    return renderToString(app, {
+    return renderToString(App, {
         rehydrate: true,
         services: {
             router
