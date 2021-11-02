@@ -1,6 +1,15 @@
-## @tracked
+## Preconditions
 
-https://github.com/pzuraq/tracked-built-ins
+1. Ensure you have registered [github](http://github.com/) account.
+1. Ensure you have [VSCode](https://code.visualstudio.com/download) installed
+1. Ensure you have NodeJS 16.13.0 installed, if not - install [volta](https://volta.sh/)
+1. Install [GitHub GraphQL Explorer](https://docs.github.com/en/graphql/overview/explorer) to your github profile
+1. Visit [github.com/settings/tokens](https://github.com/settings/tokens) and generate empty token (without checkboxes), name may be: `glimmerx-workshop`;
+
+
+## @tracked builtins
+
+[github.com/pzuraq/tracked-built-ins](https://github.com/pzuraq/tracked-built-ins)
 
 ## Tree-shaking
 
