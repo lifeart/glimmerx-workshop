@@ -7,20 +7,16 @@ import logo from "./assets/glimmer-logo.png";
 import Component from '@glint/environment-glimmerx/component';
 import { on } from '@glint/environment-glimmerx/modifier';
 import type { TemplateComponent } from '@glint/environment-glimmerx/component';
-import UsersRoute from './routes/users/index.hbs';
+import UsersRoute from './routes/users/index';
 import UserRoute from './routes/users/user/index.hbs';
 
 import HelloWorld from "./components/HelloWorld.hbs";
 
 import LazyComponentWrapper from "./utils/LazyComponent";
-import { getSearchValue, setSearchValue } from "./utils/search-params";
 import type IRepositoriesLoader from './components/RepositoriesLoader';
 import { Page, Router } from '@lifeart/tiny-router';
 import setupApolloClient from './configs/apollo';
 import StackedRouter from './components/StackedRouter';
-
-// @ts-ignore
-const Heading: TemplateComponent<{ Args: { contributorName: string } }> = hbs`<h1>Hello {{@contributorName}}!</h1>`;
 
 // @ts-ignore
 const RepoLink: TemplateComponent<{Element: HTMLAnchorElement, Args: {
@@ -46,6 +42,31 @@ const ListItem: TemplateComponent<ListItemParams> = hbs`
     </div>
 `;
 
+// @ts-ignore
+const InputForm: TemplateComponent<{
+  Args: {
+    logo: string;
+    updateValue(e: any): void;
+  },
+  Element: HTMLDivElement
+}> = hbs`
+    <div class="flex" ...attributes>
+          <div>
+            <a href="/">
+              <img alt="GlimmerX" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
+              src={{@logo}} />
+            </a>
+          </div>
+          <div class="flex-grow">
+            {{!-- template-lint-disable require-input-label --}}
+            <input
+              placeholder="specify github username"
+              class="shadow mt-2 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              {{on 'change' @updateValue}} />
+          </div>
+        </div>
+`;
+
 export default class App extends Component<{}> {
   constructor(owner: any, args: Record<string, unknown>) {
     // @ts-ignore
@@ -58,26 +79,51 @@ export default class App extends Component<{}> {
   get page() {
     return this.router.activeRoute?.page;
   }
-  get model() {
-    return this.router.activeRoute?.data;
-  }
   get stack() {
-    return this.router.stack;
+    return this.router.stack.map((e) => {
+      if (e.name !== 'users') {
+        return e;
+      } else {
+        return { name: e.name, data: {
+          data: Array.from(new Set([...this.contributors, ...e.data])).map((name) => {
+            return {
+              isActive: name === this.page?.params.login,
+              name,
+              canRemove: !e.data.includes(name)
+            }
+          }),
+          onRemove: (contributor: string) => {
+            this.contributors = this.contributors.filter((el) => el !== contributor);
+            this.router.open('/users', true);
+          }
+        }};
+      }
+    })
   }
   @service router!: Router;
 
-  get RouteComponent() {
-    return this?.model?.component ?? HelloWorld;
-  }
+  @tracked _contributorName = '';
 
-  @tracked _contributorName = getSearchValue('contributor','vite');
+  @tracked contributors: string[] = [];
 
-  get contributorName() {
-    return this._contributorName as string;
-  }
-  set contributorName(value: string) {
-    setSearchValue('contributor', value);
-    this._contributorName = value;
+  @action updateValue(event: Event) {
+    const node = (event.target as HTMLInputElement);
+    const name = node.value;
+    this.contributors = [name, ...this.contributors];
+    // clean input
+    node.value = '';
+  
+    if (name === "icon") {
+      this.Icon.loadComponent();
+    } else if (name === "-icon") {
+      this.Icon.unloadComponent();
+    } else if (name=== "user") {
+      this.UserList.loadComponent();
+    } else if (name === "-user") {
+      this.UserList.unloadComponent();
+    }
+
+    this.router.open(`/users/${name}`);
   }
   Repositories = new LazyComponentWrapper<IRepositoriesLoader>(() => import('./components/RepositoriesLoader'));
   Icon = new LazyComponentWrapper<TemplateComponent>(() => import('./components/LazyIcon.hbs'));
@@ -92,47 +138,29 @@ export default class App extends Component<{}> {
     <div class="container px-5 py-24 mx-auto">
       <div class="xl:w-1/2 lg:w-3/4 w-full mx-auto text-center">
         <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Hello, Holy!</h1>
-        <StackedRouter @components={{this.components}} @stack={{this.stack}} @params={{this.page.params}} />
-        <div class="flex">
-          <div>
-            {{!-- template-lint-disable require-valid-alt-text --}}
-            <img class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
-              src={{this.assets.logo}} />
-          </div>
-          <div class="flex-grow">
-            {{!-- template-lint-disable require-input-label --}}
-            <input
-              class="shadow mt-2 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              {{on 'input' this.updateValue}} value={{this.contributorName}} />
-          </div>
-        </div>
-        <Heading @contributorName={{this.contributorName}} />
-        [
-          <a href="/users/{{this.contributorName}}">second</a> |
-          <a href="/">main</a>
-        ]
-        <this.RouteComponent @model={{this.model}} />
+        
+        <InputForm 
+          class="mb-2" 
+          @logo={{this.assets.logo}} 
+          @updateValue={{this.updateValue}} 
+        />
+      
+        <StackedRouter 
+          @components={{this.components}} 
+          @stack={{this.stack}} 
+          @params={{this.page.params}} />
 
         {{#if this.Repositories.isLoaded}}
-          <this.Repositories.Component @login={{this.contributorName}} as |items|>
+          <this.Repositories.Component @login={{"lifeart"}} as |items|>
             <div class="py-3 text-sm">
               {{#each items as |repo|}}
-                <ListItem @login={{this.contributorName}} @name={{repo.name}} />
+                <ListItem @login="lifeart" @name={{repo.name}} />
               {{else}}
                 No data to show
               {{/each}}
             </div>
           </this.Repositories.Component>
-        {{else}}
-            <div class="py-3 text-sm">
-              {{#each this.model.data as |repo|}}
-                <ListItem @login={{this.contributorName}} @name={{repo.name}} />
-              {{/each}}
-            </div>
         {{/if}}
-
-     
-
 
         {{#if this.Icon.isLoaded}}
           <this.Icon.Component />
@@ -148,17 +176,6 @@ export default class App extends Component<{}> {
     </div>
   </section>
 
-    `;
-  @action updateValue(event: Event) {
-    this.contributorName = (event.target as HTMLInputElement).value;
-    if (this.contributorName === "icon") {
-      this.Icon.loadComponent();
-    } else if (this.contributorName === "-icon") {
-      this.Icon.unloadComponent();
-    } else if (this.contributorName === "user") {
-      this.UserList.loadComponent();
-    } else if (this.contributorName === "-user") {
-      this.UserList.unloadComponent();
-    }
-  }
+  `;
+
 }
