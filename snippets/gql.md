@@ -1,10 +1,4 @@
-
-import { hbs, tracked } from '@glimmerx/component';
-import { useQuery, gql } from 'glimmer-apollo';
-import Component from '@glint/environment-glimmerx/component';
-import setupApolloClient from '../configs/apollo';
-
-
+```ts
 export type RepoNode = {
     description: string;
     id: string;
@@ -37,35 +31,13 @@ export const ListOfRepositoriesQuery = gql`
     }
 `;
 
-export interface IRepositoriesLoader {
-    Args: {
-        login: string
-    },
-    Yields: {
-        default: [RepoNode[]]
-    }
-}
-
-export default class RepositoriesLoader extends Component<IRepositoriesLoader> {
-    constructor() {
-        // @ts-ignore
-        super(...arguments);
-        setupApolloClient(this);
-    }
-
+{
     query = useQuery<IListOfRepositoriesQuery>(this, () => [
         ListOfRepositoriesQuery,
         {
             variables: { login: this.args.login },
         }
     ]);
-
-    get repos() {
-        return this.query.data?.repositoryOwner.repositories.nodes ?? [];
-    }
-
-    static template = hbs`
-        {{yield this.repos}}
-    `
-
 }
+
+```
