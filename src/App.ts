@@ -51,6 +51,8 @@ export default class App extends Component<{}> {
   @service router!: Router;
   @tracked contributors: string[] = [];
 
+  title = 'Hello, Holy!';
+
   get page() {
     return this.router.activeRoute?.page;
   }
@@ -97,7 +99,7 @@ export default class App extends Component<{}> {
   <section class="text-gray-600 body-font">
     <div class="container px-5 py-24 mx-auto">
       <div class="xl:w-1/2 lg:w-3/4 w-full mx-auto text-center">
-        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Hello, Holy!</h1>
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">{{this.title}}</h1>
         
         <InputForm 
           class="mb-2" 
