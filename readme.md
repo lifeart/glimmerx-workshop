@@ -2,7 +2,8 @@
 
 1. Ensure you have registered [github](http://github.com/) account.
 1. Ensure you have [VSCode](https://code.visualstudio.com/download) installed
-1. Ensure you have NodeJS 16.13.0 installed, if not - install [volta](https://volta.sh/)
+1. Ensure you have [NodeJS](https://nodejs.org/en/) 16.13.0 installed, if not - install [volta](https://volta.sh/)
+1. Ensure you have [Yarn](https://yarnpkg.com/) 1.22.17 installed, if not - install [volta](https://volta.sh/)
 1. Install [GitHub GraphQL Explorer](https://docs.github.com/en/graphql/overview/explorer) to your github profile
 1. Visit [github.com/settings/tokens](https://github.com/settings/tokens) and generate empty token (without checkboxes), name may be: `glimmerx-workshop`;
 
@@ -46,3 +47,16 @@ https://github.com/rajasegar/glimmer-webpack/blob/main/src/App.js
 https://github.com/0ahz/vite-plugin-babel-import/blob/main/src/index.ts
 
 https://github.com/vitejs/awesome-vite#plugins
+
+
+
+## Deps:
+
+https://vitejs.dev/
+https://tailwindcss.com/
+https://glimmer-apollo.com/
+https://jestjs.io/
+https://storybook.js.org/
+https://github.com/glimmerjs/glimmer-experimental/
+https://github.com/lifeart/tiny-router
+https://github.com/typed-ember/glint
