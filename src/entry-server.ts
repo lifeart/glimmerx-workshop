@@ -6,7 +6,7 @@ import App from './App';
 import { router } from './router';
 import { createSearchParams } from './utils/search-params';
 
-const app = hbs`<div>123</div>`;
+const app = hbs``;
 
 export async function render(url: string) {
     createSearchParams(url);

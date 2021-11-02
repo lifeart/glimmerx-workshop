@@ -1,7 +1,7 @@
 import 'glimmer-apollo/environment-glimmer';
 
 import { renderComponent } from '@glimmerx/core';
-import App from './Pt3Slots';
+import App from './App';
 import { router } from './router';
 import './style.css';
 

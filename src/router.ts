@@ -37,5 +37,5 @@ router.addResolver('users.user', async (params: RouteParams) => {
 
 
 router.addResolver('users', async () => {
-  return ["lifeart", "wycatz", "tomdale"];
+  return ["lifeart", "wycats", "tomdale"];
 });
