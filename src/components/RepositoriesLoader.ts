@@ -25,7 +25,7 @@ export const ListOfRepositoriesQuery = gql`
     query ListOfRepositories($login: String!) {
         repositoryOwner(login: $login) {
             login
-            repositories(last: 20) {
+            repositories(first: 20, orderBy: {field: UPDATED_AT, direction: DESC}, privacy: PUBLIC, isFork: false) {
             nodes {
                 description
                 id
