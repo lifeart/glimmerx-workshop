@@ -1,6 +1,8 @@
 import Component, { hbs } from '@glimmerx/component';
+import { TemplateComponent } from '@glint/environment-glimmerx/component';
 
-const DefaultRoute = hbs`
+// @ts-ignore
+const DefaultRoute: TemplateComponent<{Args: { hasChildren: boolean }}> = hbs`
   {{#if @hasChildren}} {{yield}} {{/if}}
 `;
 
