@@ -1,46 +1,19 @@
 import { hbs, tracked } from '@glimmerx/component';
 import { service } from '@glimmerx/service';
-
 import { action } from '@glimmerx/modifier';
-import logo from "./assets/glimmer-logo.png";
-
 import Component from '@glint/environment-glimmerx/component';
+
 import { on } from '@glint/environment-glimmerx/modifier';
 import type { TemplateComponent } from '@glint/environment-glimmerx/component';
+
+import type { Router } from '@lifeart/tiny-router';
+
 import UsersRoute from './routes/users/index';
 import UserRoute from './routes/users/user/index.hbs';
-
-import HelloWorld from "./components/HelloWorld.hbs";
-
 import LazyComponentWrapper from "./utils/LazyComponent";
-import type IRepositoriesLoader from './components/RepositoriesLoader';
-import { Page, Router } from '@lifeart/tiny-router';
-import setupApolloClient from './configs/apollo';
 import StackedRouter from './components/StackedRouter';
+import logo from "./assets/glimmer-logo.png";
 
-// @ts-ignore
-const RepoLink: TemplateComponent<{Element: HTMLAnchorElement, Args: {
-  login: string;
-  repo: string;
-} }> = hbs`<a ...attributes href="https://github.com/{{@login}}/{{@repo}}" target="_blank" rel="noopener noreferrer">{{@repo}}</a>`;
-
-
-interface ListItemParams {
-  Args: {
-    name: string;
-    login: string;
-  }
-}
-
-// @ts-ignore
-const ListItem: TemplateComponent<ListItemParams> = hbs`
-    <div
-      class="flex justify-start cursor-pointer text-gray-700 hover:text-blue-400 hover:bg-blue-100 rounded-md px-2 py-2 my-2">
-      <span class="bg-green-600 h-2 w-2 m-2 rounded-full"></span>
-      <RepoLink class="flex-grow font-mono px-2 text-left" @login={{@login}} @repo={{@name}} />
-      <div class="text-sm font-normal text-gray-500 tracking-wide">Team</div>
-    </div>
-`;
 
 // @ts-ignore
 const InputForm: TemplateComponent<{
@@ -68,14 +41,16 @@ const InputForm: TemplateComponent<{
 `;
 
 export default class App extends Component<{}> {
-  constructor(owner: any, args: Record<string, unknown>) {
-    // @ts-ignore
-    super(owner, args);
-    setupApolloClient(this);
-    // setTimeout(() => {
-    //   this.Repositories.loadComponent();
-    // }, 5000);
+  Icon = new LazyComponentWrapper<TemplateComponent>(() => import('./components/LazyIcon.hbs'));
+  assets = { logo };
+  components = {
+    'users': UsersRoute,
+    'users.user': UserRoute
   }
+
+  @service router!: Router;
+  @tracked contributors: string[] = [];
+
   get page() {
     return this.router.activeRoute?.page;
   }
@@ -100,11 +75,7 @@ export default class App extends Component<{}> {
       }
     })
   }
-  @service router!: Router;
 
-  @tracked _contributorName = '';
-
-  @tracked contributors: string[] = [];
 
   @action updateValue(event: Event) {
     const node = (event.target as HTMLInputElement);
@@ -113,25 +84,14 @@ export default class App extends Component<{}> {
     // clean input
     node.value = '';
   
+    // easter egg
     if (name === "icon") {
       this.Icon.loadComponent();
     } else if (name === "-icon") {
       this.Icon.unloadComponent();
-    } else if (name=== "user") {
-      this.UserList.loadComponent();
-    } else if (name === "-user") {
-      this.UserList.unloadComponent();
     }
 
     this.router.open(`/users/${name}`);
-  }
-  Repositories = new LazyComponentWrapper<IRepositoriesLoader>(() => import('./components/RepositoriesLoader'));
-  Icon = new LazyComponentWrapper<TemplateComponent>(() => import('./components/LazyIcon.hbs'));
-  UserList = new LazyComponentWrapper<TemplateComponent<{ Args: { logo: string; title: string } }>>(() => import('./components/UserList.hbs'));
-  assets = { logo };
-  components = {
-    'users': UsersRoute,
-    'users.user': UserRoute
   }
   static template = hbs`
   <section class="text-gray-600 body-font">
@@ -150,17 +110,6 @@ export default class App extends Component<{}> {
           @stack={{this.stack}} 
           @params={{this.page.params}} />
 
-        {{#if this.Repositories.isLoaded}}
-          <this.Repositories.Component @login={{"lifeart"}} as |items|>
-            <div class="py-3 text-sm">
-              {{#each items as |repo|}}
-                <ListItem @login="lifeart" @name={{repo.name}} />
-              {{else}}
-                No data to show
-              {{/each}}
-            </div>
-          </this.Repositories.Component>
-        {{/if}}
 
         {{#if this.Icon.isLoaded}}
           <this.Icon.Component />
@@ -168,9 +117,6 @@ export default class App extends Component<{}> {
           Loading...
         {{else if this.Icon.isError}}
           Loading error..
-        {{/if}}
-        {{#if this.UserList.isLoaded}}
-          <this.UserList.Component @logo={{this.assets.logo}} @title={{this.contributorName}} />
         {{/if}}
       </div>
     </div>

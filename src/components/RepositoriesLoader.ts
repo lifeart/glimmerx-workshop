@@ -2,6 +2,7 @@
 import { hbs, tracked } from '@glimmerx/component';
 import { useQuery, gql } from 'glimmer-apollo';
 import Component from '@glint/environment-glimmerx/component';
+import setupApolloClient from '../configs/apollo';
 
 
 export type RepoNode = {
@@ -46,6 +47,12 @@ export interface IRepositoriesLoader {
 }
 
 export default class RepositoriesLoader extends Component<IRepositoriesLoader> {
+    constructor() {
+        // @ts-ignore
+        super(...arguments);
+        setupApolloClient(this);
+    }
+
     query = useQuery<IListOfRepositoriesQuery>(this, () => [
         ListOfRepositoriesQuery,
         {
