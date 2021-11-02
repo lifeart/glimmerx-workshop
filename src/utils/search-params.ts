@@ -11,7 +11,8 @@ function _getSearchValues(str: string) {
     return values;
 }
 
-export function createSearchParams(str: string) {
+export function createSearchParams(url: string) {
+    const str = url.includes('?') ? url.split('?')[1] || '' : url;
     defaultSearchParams = _getSearchValues(str);
 }
 

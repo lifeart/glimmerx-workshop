@@ -1,16 +1,15 @@
 import 'glimmer-apollo/dist/cjs/environment-glimmer';
 import { renderToString } from '@glimmerx/ssr';
 import { hbs } from '@glimmerx/component';
-// import App from './App';
-// import setupApolloClient from './configs/apollo';
+import App from './App';
+
 import { router } from './router';
 import { createSearchParams } from './utils/search-params';
-// setupApolloClient(undefined);
 
-const app = hbs``;
+const app = hbs`<div>123</div>`;
 
 export async function render(url: string) {
-    createSearchParams(url.split('?')[1] || '');
+    createSearchParams(url);
     await router.mount(url, true);
     return renderToString(app, {
         rehydrate: true,
