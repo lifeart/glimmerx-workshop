@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "node ./server",
+    "vite": "vite",
     "serve-bundle": "npx http-server ./dist",
     "build": "tsc && vite build",
     "lint": "eslint ./src",
