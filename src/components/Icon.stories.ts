@@ -1,4 +1,4 @@
-import Icon from '../components/icon';
+import Icon from './icon';
 
 export default {
   title: 'Basic usage',
