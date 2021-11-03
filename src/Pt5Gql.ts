@@ -97,7 +97,6 @@ export default class QueryComponent extends Component {
     static template = hbs`
     <section class="text-gray-600 body-font">
         <div class="container px-5 py-24 mx-auto">
-            {{!-- template-lint-disable require-input-label --}}
             <input {{on 'change' this.setLogin}}
                 class="shadow mt-2 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
             {{this.login}} have {{this.repos.length}} repos.

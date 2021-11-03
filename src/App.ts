@@ -31,7 +31,6 @@ const InputForm: TemplateComponent<{
             </a>
           </div>
           <div class="flex-grow">
-            {{!-- template-lint-disable require-input-label --}}
             <input
               placeholder="specify github username"
               class="shadow mt-2 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
