@@ -77,3 +77,10 @@
 * https://github.com/glimmerjs/glimmer-experimental/
 * https://github.com/lifeart/tiny-router
 * https://github.com/typed-ember/glint
+
+
+## Ember Courses & books 
+
+* https://guides.emberjs.com/release/getting-started/
+* https://frontendmasters.com/courses/ember-octane/
+* https://balinterdi.com/rock-and-roll-with-emberjs/
