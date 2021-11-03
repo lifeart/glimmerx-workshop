@@ -5,6 +5,7 @@ module.exports = {
   rules: {
     'no-inline-styles': false,
     'style-concatenation': false,
-    'require-input-label': false
+    'require-input-label': false,
+    'builtin-component-arguments': false,
   }
 };
