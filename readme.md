@@ -1,7 +1,7 @@
 # GlimmerX Workshop
 
 <img align="right" width="95" height="95"
-     alt="Philosopher’s stone, logo of PostCSS"
+     alt="Glimmer Experimental Favicon"
      src="./favicon.svg">
 
 
