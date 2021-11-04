@@ -9,7 +9,7 @@ This is full featured SPA application created using GlimmerX library.
 
 You can use it to explore possibilities of GlimmerVM outside of Ember.js ecosystem.
 
-Repo includes:
+### Repo includes:
 
 * State managment examples
 * Lazy component loading patterns
