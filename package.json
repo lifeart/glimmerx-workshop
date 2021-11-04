@@ -18,6 +18,7 @@
     "**/@glimmer/owner": "0.77.6",
     "**/@glimmer/manager": "0.77.6",
     "**/@glimmer/reference": "0.77.6",
+    "**/@glimmer/interfaces": "0.77.6",
     "**/@glimmer/util": "0.77.6"
   },
   "devDependencies": {
