@@ -5,10 +5,7 @@ import { on } from '@glimmerx/modifier';
 
 export default class UsersRoute extends Component<{
   Args: {
-    model: {
-      data: {name: string, canRemove: boolean, isActive: boolean}[],
-      onRemove(e: any): void;
-    },
+    model: string[],
     hasChildren: boolean
   }
 }> {
@@ -18,12 +15,9 @@ export default class UsersRoute extends Component<{
   <div class="grid grid-cols-4 gap-4">
     <div class="col-span-1">
       <ul>
-        {{#each @model.data as |user|}}
+        {{#each @model as |login|}}
           <li class="text-left hover:text-black underline bg-blue-100 rounded-md mb-2 mt-2 p-1">
-            <a href="/users/{{user.name}}" class={{if user.isActive "font-bold"}}>{{user.name}}</a>
-            {{#if user.canRemove}}
-              <button class="ml-2 float-right mt-1 font-mono text-sm" type="button" {{on 'click' (fn @model.onRemove user.name)}}>[X]</button>
-            {{/if}}
+            <a href="/users/{{login}}">{{login}}</a>
           </li>
         {{/each}}
       </ul>
