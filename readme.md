@@ -13,6 +13,7 @@
 1. [How Autotracking Works](https://www.pzuraq.com/how-autotracking-works/)
 1. [Autotracking: Elegant DX Via Cutting-Edge CS](https://v5.chriskrycho.com/journal/autotracking-elegant-dx-via-cutting-edge-cs/)
 1. [@use and Resources RFC](https://www.pzuraq.com/introducing-use/)
+1. [Autotracking Simplified example](https://gist.github.com/pzuraq/79bf862e0f8cd9521b79c4b6eccdc4f9)
 
 ## RFC's
 
