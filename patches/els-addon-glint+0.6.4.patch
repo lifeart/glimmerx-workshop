@@ -1,8 +1,8 @@
 diff --git a/node_modules/els-addon-glint/index.js b/node_modules/els-addon-glint/index.js
-index e7112d4..7d25b3a 100644
+index e7112d4..cd45632 100644
 --- a/node_modules/els-addon-glint/index.js
 +++ b/node_modules/els-addon-glint/index.js
-@@ -41,6 +41,21 @@ function buildHelpers({ languageServer , documents , connection  }) {
+@@ -41,6 +41,24 @@ function buildHelpers({ languageServer , documents , connection  }) {
                      if (message.includes('No overload matches this call.')) {
                          return false;
                      }
@@ -21,10 +21,13 @@ index e7112d4..7d25b3a 100644
 +                    if (message.includes("is not assignable to parameter of type 'Element'")) {
 +                        return false;
 +                    }
++                    if (message.includes("Type 'unknown' is not assignable to type 'SafeString'")) {
++                        return false;
++                    }
                      return true;
                  });
                  if (filteredDiagnostics.length) {
-@@ -143,6 +158,9 @@ module.exports = class ElsAddonQunitTestRunner {
+@@ -143,6 +161,9 @@ module.exports = class ElsAddonQunitTestRunner {
      }
      async onComplete(_, params) {
          const results = await this.languageServer.getCompletions(params.textDocument.uri, params.position);
