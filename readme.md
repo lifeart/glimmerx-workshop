@@ -5,9 +5,9 @@
      src="./favicon.svg">
 
 
-This is full featured SPA application created using GlimmerX library.
+This is full featured SPA application created using [GlimmerX](https://github.com/glimmerjs/glimmer-experimental) library.
 
-You can use it to explore possibilities of GlimmerVM outside of Ember.js ecosystem.
+You can use it to explore possibilities of [GlimmerVM](https://github.com/glimmerjs/glimmer-vm) outside of [Ember.js](http://emberjs.com/) ecosystem.
 
 ### Repo includes:
 
@@ -18,6 +18,7 @@ You can use it to explore possibilities of GlimmerVM outside of Ember.js ecosyst
 * Server Side rendering and rehydration
 * Tests
 * Storybook integraion
+* Typed templates
 
 ## Prerequisites
 
