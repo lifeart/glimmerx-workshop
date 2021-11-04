@@ -43,6 +43,14 @@ export const ListOfRepositoriesQuery = gql`
 
 {
     uri: 'https://api.github.com/graphql',
+}
+
+
+
+
+
+
+{
     headers: {
         Authorization: 'Bearer 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'
     },
