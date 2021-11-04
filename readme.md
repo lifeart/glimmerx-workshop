@@ -1,4 +1,27 @@
-## Preconditions
+# GlimmerX Workshop
+
+<img align="right" width="95" height="95"
+     alt="Philosopher’s stone, logo of PostCSS"
+     src="./favicon.svg">
+
+
+This is full featured SPA application created using GlimmerX library.
+
+You can use it to explore possibilities of GlimmerVM outside of Ember.js ecosystem.
+
+Repo includes:
+
+* State managment examples
+* Lazy component loading patterns
+* GraphQL Apollo integraion
+* Routing
+* Server Side rendering and rehydration
+* Tests
+* Storybook integraion
+
+## Prerequisites
+
+You will need the following things properly installed on your computer.
 
 1. Ensure you have registered [github](http://github.com/) account.
 1. Ensure you have [VSCode](https://code.visualstudio.com/download) installed
@@ -7,7 +30,33 @@
 1. Install [GitHub GraphQL Explorer](https://docs.github.com/en/graphql/overview/explorer) to your github profile
 1. Visit [github.com/settings/tokens](https://github.com/settings/tokens) and generate empty token (without checkboxes), name may be: `glimmerx-workshop`;
 
-## Nice to read
+---
+
+## Installation
+
+* `git clone https://github.com/lifeart/glimmerx-workshop`
+* `cd glimmerx-workshop`
+* `yarn`
+
+### Running / Development
+
+* `yarn vite` -> pure app (no ssr)
+* `yarn dev` -> app + SSR
+* Visit your app at [http://localhost:3000](http://localhost:3000).
+
+
+### Running Tests
+
+* `yarn test`
+
+### Running Storybook
+
+* `yarn storybook`
+
+
+---
+
+## Further Reading / Useful Links
 1. [What Is Reactivity?](https://www.pzuraq.com/what-is-reactivity/)
 1. [What Makes a Good Reactive System?](https://www.pzuraq.com/what-makes-a-good-reactive-system/)
 1. [How Autotracking Works](https://www.pzuraq.com/how-autotracking-works/)
