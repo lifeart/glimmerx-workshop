@@ -22,7 +22,7 @@ export default function setupApolloClient(context: object): void {
   const httpLink = createHttpLink({
     uri: 'https://api.github.com/graphql',
     headers: {
-        Authorization: 'Bearer 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'
+        Authorization: 'Bearer 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'
     },
     fetch
   });

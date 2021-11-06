@@ -36,7 +36,10 @@ router.addResolver('users.user', async (params: RouteParams) => {
 });
 
 
-router.addResolver('users', async () => {
+router.addResolver('users', async ({login}) => {
   const defaultLogins = ["lifeart", "wycats", "tomdale"];
+  if (login && !defaultLogins.includes(login)) {
+    return [login, ...defaultLogins];
+  }
   return defaultLogins;
 });

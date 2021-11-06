@@ -41,6 +41,7 @@ export interface IRepositoriesLoader {
     Args: {
         login: string
     },
+    Element: HTMLButtonElement;
     Yields: {
         default: [RepoNode[]]
     }
@@ -65,6 +66,7 @@ export default class RepositoriesLoader extends Component<IRepositoriesLoader> {
     }
 
     static template = hbs`
+        <button ...attributes type="button"></button>
         {{yield this.repos}}
     `
 

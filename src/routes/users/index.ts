@@ -1,8 +1,17 @@
 import { hbs } from '@glimmerx/component';
 import Component from '@glint/environment-glimmerx/component';
 import { fn } from '@glimmerx/helper';
-import { on } from '@glimmerx/modifier';
+import { on, action } from '@glimmerx/modifier';
+import { service } from '@glimmerx/service';
+import { State } from '../../state';
+import { Router } from '@lifeart/tiny-router';
+import { positionalHelper } from '../../helpers';
 
+
+
+const activeClass = positionalHelper((isActive) => {
+  return isActive ? "font-bold" : '';
+})
 export default class UsersRoute extends Component<{
   Args: {
     model: string[],
@@ -11,13 +20,40 @@ export default class UsersRoute extends Component<{
 }> {
 
 
+  @service state!: State;
+  @service router!: Router;
+
+
+  get model() {
+    return Array.from(new Set([...this.state.users, ...this.args.model])).map((login) => {
+      return {
+        login,
+        canRemove: !this.args.model.includes(login),
+        isActive: this.router.activeRoute?.page.params.login === login
+      }
+    })
+  }
+
+
+  @action removeUser(login: string) {
+    this.state.removeUser(login);
+    this.router.open('/users');
+  }
+
   static template = hbs`
   <div class="grid grid-cols-4 gap-4">
     <div class="col-span-1">
       <ul>
-        {{#each @model as |login|}}
+        {{#each this.model as |user|}}
           <li class="text-left hover:text-black underline bg-blue-100 rounded-md mb-2 mt-2 p-1">
-            <a href="/users/{{login}}">{{login}}</a>
+            <a href="/users/{{user.login}}" 
+            
+              class={{activeClass user.isActive}}
+            >{{user.login}}</a>
+
+            {{#if user.canRemove}}
+              <button type="button" {{on 'click' (fn this.removeUser user.login)}}>[x]</button>
+            {{/if}}
           </li>
         {{/each}}
       </ul>

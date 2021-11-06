@@ -14,6 +14,7 @@ export function hashHelper(fn: simpleHelper): simpleHelper {
     })
 }
 
+
 export const sum = positionalHelper((a: number, b: number) => a + b);
 export const inc = positionalHelper((a: number, b: number) => a + (b || 1));
 export const eq = positionalHelper((a: number, b: number) => a === b);
