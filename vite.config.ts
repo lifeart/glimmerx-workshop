@@ -20,7 +20,7 @@ export default defineConfig({
         drop_debugger: true,
         ecma: 2017,
         module: true,
-        unsafe: true,
+        unsafe: false,
         unsafe_arrows: true
       },
       mangle: {
