@@ -5,6 +5,11 @@ import { on, action } from '@glimmerx/modifier';
 import { service } from '@glimmerx/service';
 import { State } from '../../services/state';
 import { Router } from '@lifeart/tiny-router';
+import { positionalHelper } from '../../helpers';
+
+const activeLinkClass = positionalHelper((isActive) => {
+  return isActive ? 'font-bold' : '';
+})
 
 export default class UsersRoute extends Component<{
   Args: {
@@ -37,7 +42,7 @@ export default class UsersRoute extends Component<{
       <ul>
         {{#each this.model as |user|}}
           <li class="text-left hover:text-black underline bg-blue-100 rounded-md mb-2 mt-2 p-1">
-            <a href="/users/{{user.login}}" class={{if user.isActive "font-bold"}}>{{user.login}}</a>
+            <a href="/users/{{user.login}}" class={{activeLinkClass user.isActive}}>{{user.login}}</a>
             {{#if user.canRemove}}
               <button class="ml-2 float-right mt-1 font-mono text-sm" type="button" {{on 'click' (fn this.onRemove user.login)}}>[X]</button>
             {{/if}}
