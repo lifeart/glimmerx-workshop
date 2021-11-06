@@ -1,0 +1,1 @@
+import{s as a,c as o,t as e}from"./vendor.61d8d0f5.js";var n=a(e({id:"akGs4OOj",block:'[[[10,"h1"],[12],[1,"I\'m an icon (kinda)"],[13]],[],false,[]]',moduleName:"(unknown template module)",scope:null,isStrictMode:1}),o("LazyIcon","_LazyIcon"));export{n as default};
