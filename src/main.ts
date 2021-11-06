@@ -5,20 +5,32 @@ import App from './App';
 import { router } from './services/router';
 import { state } from './services/state';
 
-document.addEventListener(
-  'DOMContentLoaded',
-  async () => {
+function render(rehydrate = false) {
     const element: HTMLDivElement = document.querySelector<HTMLDivElement>('#app') as HTMLDivElement;
 
-    await router.mount();
-    renderComponent(App, {
-      element: element,
-      rehydrate: true,
-      services: {
-        router,
-        state
-      },
+    return renderComponent(App, {
+        element: element,
+        rehydrate,
+        services: {
+            router,
+            state
+        },
     });
-  },
-  { once: true }
+}
+
+document.addEventListener(
+    'DOMContentLoaded',
+    async () => {
+
+        await router.mount();
+
+        try {
+            await render(true);
+        } catch (e) {
+            console.info('unable to rehydrate app');
+            await render(false);
+        }
+
+    },
+    { once: true }
 );
