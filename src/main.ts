@@ -27,7 +27,7 @@ document.addEventListener(
         try {
             await render(true);
         } catch (e) {
-            console.info('unable to rehydrate app');
+            console.info('unable to rehydrate app, ensure you have SSR option "reghydrate = true"');
             await render(false);
         }
 

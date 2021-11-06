@@ -3,9 +3,10 @@ import Component from '@glint/environment-glimmerx/component';
 import { fn } from '@glimmerx/helper';
 import { on, action } from '@glimmerx/modifier';
 import { service } from '@glimmerx/service';
-import { State } from '../../services/state';
-import { Router } from '@lifeart/tiny-router';
 import { positionalHelper } from '../../helpers';
+
+import type { State } from '../../services/state';
+import type { Router } from '@lifeart/tiny-router';
 
 const activeLinkClass = positionalHelper((isActive) => {
   return isActive ? 'font-bold' : '';

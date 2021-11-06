@@ -28,7 +28,14 @@ router.addResolver('users.user', async (params: RouteParams) => {
         }
     ]);  
 
-    await result.promise;
+    try {
+      await result.promise;
+    } catch(e) {
+      console.log(result.error);
+
+      return [];
+    }
+
     const data = result.data?.repositoryOwner?.repositories.nodes || [];
     return data.map(e => {
       return {...e, ...{ login: params.login }}
