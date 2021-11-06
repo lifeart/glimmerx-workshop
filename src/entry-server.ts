@@ -3,16 +3,17 @@ import { renderToString } from '@glimmerx/ssr';
 import { hbs } from '@glimmerx/component';
 import App from './App';
 
-import { router } from './router';
+import { router } from './services/router';
+import { state } from './services/state';
 
-const app = hbs``;
 
 export async function render(url: string) {
     await router.mount(url, true);
     return renderToString(App, {
         rehydrate: true,
         services: {
-            router
+            router,
+            state
         },
     });
 }

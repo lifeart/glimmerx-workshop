@@ -2,7 +2,8 @@ import 'glimmer-apollo/environment-glimmer';
 
 import { renderComponent } from '@glimmerx/core';
 import App from './App';
-import { router } from './router';
+import { router } from './services/router';
+import { state } from './services/state';
 
 document.addEventListener(
   'DOMContentLoaded',
@@ -14,7 +15,8 @@ document.addEventListener(
       element: element,
       rehydrate: true,
       services: {
-        router
+        router,
+        state
       },
     });
   },

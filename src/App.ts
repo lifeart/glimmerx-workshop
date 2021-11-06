@@ -13,6 +13,7 @@ import UserRoute from './routes/users/user/index.hbs';
 import LazyComponentWrapper from "./utils/LazyComponent";
 import NestedRouter from './components/NestedRouter';
 import logo from "./assets/glimmer-logo.png";
+import { state, State } from './services/state';
 
 
 // @ts-ignore
@@ -42,46 +43,21 @@ const InputForm: TemplateComponent<{
 export default class App extends Component<{}> {
   Icon = new LazyComponentWrapper<TemplateComponent>(() => import('./components/LazyIcon.hbs'));
   assets = { logo };
+
   components = {
     'users': UsersRoute,
     'users.user': UserRoute
   }
 
   @service router!: Router;
-  @tracked contributors: string[] = [];
+  @service state!: State;
 
   title = 'Hello, Holy!';
-
-  get page() {
-    return this.router.activeRoute?.page;
-  }
-  get stack() {
-    return this.router.stack.map((e) => {
-      if (e.name !== 'users') {
-        return e;
-      } else {
-        return { name: e.name, data: {
-          data: Array.from(new Set([...this.contributors, ...e.data])).map((name) => {
-            return {
-              isActive: name === this.page?.params.login,
-              name,
-              canRemove: !e.data.includes(name)
-            }
-          }),
-          onRemove: (contributor: string) => {
-            this.contributors = this.contributors.filter((el) => el !== contributor);
-            this.router.open('/users', true);
-          }
-        }};
-      }
-    })
-  }
-
 
   @action updateValue(event: Event) {
     const node = (event.target as HTMLInputElement);
     const name = node.value;
-    this.contributors = [name, ...this.contributors];
+    this.state.addUser(name);
     // clean input
     node.value = '';
   
@@ -108,8 +84,8 @@ export default class App extends Component<{}> {
       
         <NestedRouter 
           @components={{this.components}} 
-          @stack={{this.stack}} 
-          @params={{this.page.params}} />
+          @stack={{this.router.stack}} 
+        />
 
 
         {{#if this.Icon.isLoaded}}
