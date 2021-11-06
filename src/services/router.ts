@@ -32,6 +32,7 @@ router.addResolver('users.user', async (params: RouteParams) => {
       await result.promise;
     } catch(e) {
       console.log(result.error);
+      console.info('Ensure you have up to date github token, specified in /src/configs/apollo.ts (line 25)')
 
       return [];
     }

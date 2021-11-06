@@ -27,7 +27,7 @@ document.addEventListener(
         try {
             await render(true);
         } catch (e) {
-            console.info('unable to rehydrate app, ensure you have SSR option "reghydrate = true"');
+            console.info('Unable to rehydrate app, ensure you have SSR option "reghydrate = true" and SSR server is running');
             await render(false);
         }
 
