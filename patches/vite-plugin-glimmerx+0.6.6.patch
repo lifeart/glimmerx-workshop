@@ -1,0 +1,36 @@
+diff --git a/node_modules/vite-plugin-glimmerx/index.cjs.js b/node_modules/vite-plugin-glimmerx/index.cjs.js
+index 45152bc..cb5aab0 100644
+--- a/node_modules/vite-plugin-glimmerx/index.cjs.js
++++ b/node_modules/vite-plugin-glimmerx/index.cjs.js
+@@ -52,9 +52,9 @@ function vitePluginGlimmerX(plgOptions) {
+       } else if (!scriptFileRegex.test(id)) {
+         return;
+       }
+-      if (!isNodeModulesPath(id)) {
+-        code = code.split("@glint/environment-glimmerx/").join("@glimmerx/");
+-      }
++      // if (!isNodeModulesPath(id)) {
++      //   code = code.split("@glint/environment-glimmerx/").join("@glimmerx/");
++      // }
+       const needPatch = !isNodeModulesPath(id);
+       const imports = (0, import_parse_static_imports.default)(code).filter((e) => {
+         return e.moduleName.startsWith("@glint/") || e.moduleName.startsWith("@glimmerx/") || !e.moduleName.startsWith("@");
+diff --git a/node_modules/vite-plugin-glimmerx/index.js b/node_modules/vite-plugin-glimmerx/index.js
+index cd989b7..cae404e 100644
+--- a/node_modules/vite-plugin-glimmerx/index.js
++++ b/node_modules/vite-plugin-glimmerx/index.js
+@@ -35,10 +35,10 @@ export default function vitePluginGlimmerX(
+         return;
+       }
+ 
+-      if (!isNodeModulesPath(id)) {
+-        // https://github.com/typed-ember/glint/issues/223
+-        code = code.split('@glint/environment-glimmerx/').join('@glimmerx/');
+-      }
++      // if (!isNodeModulesPath(id)) {
++      //   // https://github.com/typed-ember/glint/issues/223
++      //   code = code.split('@glint/environment-glimmerx/').join('@glimmerx/');
++      // }
+ 
+       const needPatch = !isNodeModulesPath(id);
+ 
