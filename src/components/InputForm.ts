@@ -16,7 +16,7 @@ const InputForm: TC<InputFormSignature> = hbs`
         <div>
             <a href="/">
                 <img alt="GlimmerX" class="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4"
-                    src={{@logo}} />
+                    src={{@logos}} />
             </a>
         </div>
         <div class="flex-grow">
