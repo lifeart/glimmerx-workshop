@@ -20,7 +20,7 @@ module.exports = {
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         "@typescript-eslint/ban-types": 'off'
     },
-    "owerrides": [
+    "overrides": [
         {
             files: [
               './.eslintrc.js',
