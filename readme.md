@@ -31,6 +31,12 @@ You will need the following things properly installed on your computer.
 1. Install [GitHub GraphQL Explorer](https://docs.github.com/en/graphql/overview/explorer) to your github profile
 1. Visit [github.com/settings/tokens](https://github.com/settings/tokens) and generate empty token (without checkboxes), name may be: `glimmerx-workshop`;
 
+## Workshop Video [RU]
+
+| Part 1 | Part 2 |
+|---|---|
+|[![Workshop preview (part one)](http://img.youtube.com/vi/C-gBuD534lY/0.jpg)](http://www.youtube.com/watch?v=C-gBuD534lY "GlimmerX workshop part 1")|[![Workshop preview (part two)](http://img.youtube.com/vi/hAJJ9Y3UGvk/0.jpg)](http://www.youtube.com/watch?v=hAJJ9Y3UGvk "GlimmerX workshop part 2")|
+
 ---
 
 ## Installation
